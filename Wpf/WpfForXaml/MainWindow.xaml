@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfForXaml.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfForXaml"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- 1. 代码更加简洁，容易读（父子结构层次 -->
+        <!-- 2. 可以借助 Blend 等可视化工具方便 UI 人员进行专业界面设计 -->
+        <!-- 3. 可以利用 MVVM 等设计思想进行解耦 -->
+        <!-- 渐变矩形 -->
+        <Rectangle Name="rectangle1" Width="200" Height="200">
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.3" Color="LightBlue"/>
+                        <GradientStop Offset="0.6" Color="LightGreen"/>
+                        <GradientStop Offset="0.9" Color="LightPink"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button Width="200" Height="200" HorizontalAlignment="Left"
+                Click="OnTulingClick"
+                ></Button>
+    </Grid>
+</Window>

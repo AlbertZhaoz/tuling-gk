@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfBindingDemo.Binding03"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfBindingDemo"
+        mc:Ignorable="d"
+        Title="Binding03" Height="450" Width="400">
+    <!--03.集合类型绑定、LINQ 绑定-->
+    <StackPanel>
+        <TextBlock Text="EmployeeID" Margin="10"/>
+        <TextBox x:Name="TextBoxEmployeeId" Margin="4"
+                 Text="{Binding ElementName=ListBoxEmployee,
+            Path=SelectedItem.Id}"/>
+        <TextBlock Text="EmployeeList" Margin="10"/>
+        <ListBox x:Name="ListBoxEmployee" Height="200">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Id}" Margin="2"/>
+                        <TextBlock Text="{Binding Path=Name}" Margin="2"/>
+                        <TextBlock Text="{Binding Path=Score}" Margin="2"/>
+                        <Button Background="Red" Content="Delete" Width="40"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</Window>

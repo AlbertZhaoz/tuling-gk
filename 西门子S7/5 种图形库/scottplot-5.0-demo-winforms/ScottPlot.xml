@@ -1,0 +1,4136 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ScottPlot</name>
+    </assembly>
+    <members>
+        <member name="M:ScottPlot.AutoScalers.FractionalAutoScaler.#ctor(System.Double,System.Double)">
+            <summary>
+            Pad the data area with the given fractions of whitespace.
+            A value of 0.1 means 10% padding (5% on each side of the data area).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AutoScalers.FractionalAutoScaler.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Pad each side of the data area with the exact fraction of whitespace.
+            0.05 means 5% whitespace on that side of the data area.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.AxisLimitManagers.FixedWidth.ExpandFractionY">
+            <summary>
+            Fractional amount to expand the axis vertically if data runs outside the current view
+            </summary>
+        </member>
+        <member name="T:ScottPlot.AxisLimitManagers.Full">
+            <summary>
+            Show the entire range of data, changing the axis limits only
+            when the data extends outside the current view.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisLimitManagers.Full.ExpansionRatio">
+            <summary>
+            Defines the amount of whitespace added to the right of the data when data runs outside the current view.
+            1.0 for a view that tightly fits the data and is always changing.
+            2.0 for a view that doubles the horizontal span when new data runs outside the current view.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.AxisLimitManagers.Slide">
+            <summary>
+            Slide the view to the right to keep the newest data points in view
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisLimitManagers.Slide.Width">
+            <summary>
+            Amount of horizontal area to display (in axis units)
+            </summary>
+        </member>
+        <member name="F:ScottPlot.AxisLimitManagers.Slide.PaddingFractionX">
+            <summary>
+            Defines the amount of whitespace added to the right of the data when data runs outside the current view.
+            0 for a view that slides every time new data is added
+            1 for a view that only slides forward when new data runs off the screen
+            </summary>
+        </member>
+        <member name="F:ScottPlot.AxisLimitManagers.Slide.PaddingFractionY">
+            <summary>
+            Defines the amount of whitespace added to the top or bottom of the data when data runs outside the current view.
+            0 sets axis limits to tightly fit the data height
+            1 sets axis limits to double the vertical span in the direction of the vertical overflow
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.AutoScaler">
+            <summary>
+            Logic that determines padding around the data area when <see cref="!:AutoScale()"/> is called
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.XAxes">
+            <summary>
+            Horizontal axes
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.YAxes">
+            <summary>
+            Vertical axes
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Panels">
+            <summary>
+            Panels take up space on one side of the data area (like a colorbar)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Title">
+            <summary>
+            A special panel
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetAxes">
+            <summary>
+            All axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetAxes(ScottPlot.Edge)">
+            <summary>
+            All axes with the given edge
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetPanels">
+            <summary>
+            Returns all axes, panels, and the title
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Top">
+            <summary>
+            The primary horizontal axis above the plot
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Bottom">
+            <summary>
+            The primary horizontal axis below the plot
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Left">
+            <summary>
+            The primary vertical axis to the left of the plot
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Right">
+            <summary>
+            The primary vertical axis to the right of the plot
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.LimitsHaveBeenSet">
+            <summary>
+            Indicates whether the axis limits have been set (manually or by autoscale)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.DefaultGrid">
+            <summary>
+            The standard grid that is added when a Plot is created.
+            Users can achieve custom grid functionality by disabling the visibility
+            of this grid and adding their own classes to the List of <see cref="P:ScottPlot.AxisManager.CustomGrids"/>.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.CustomGrids">
+            <summary>
+            List of custom grids.
+            If in use, it is likely the default grid visibility should be disabled.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.AllGrids">
+            <summary>
+            Return the <see cref="P:ScottPlot.AxisManager.DefaultGrid"/> and all <see cref="P:ScottPlot.AxisManager.CustomGrids"/>
+            </summary>
+        </member>
+        <member name="P:ScottPlot.AxisManager.Rules">
+            <summary>
+            Rules that are applied before each render
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.#ctor(ScottPlot.Plot)">
+            <summary>
+            Contains state and logic for axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Color(ScottPlot.Color)">
+            <summary>
+            Apply a single color to the label, tick labels, tick marks, and frame of all axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Color(ScottPlot.IAxis,ScottPlot.Color)">
+            <summary>
+            Apply a single color to the label, tick labels, tick marks, and frame of the specified axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Frame(System.Boolean)">
+            <summary>
+            Set visibility of the frame on every axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.FrameWidth(System.Single)">
+            <summary>
+            Set thickness of the frame on every axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.FrameColor(ScottPlot.Color)">
+            <summary>
+            Set color of the frame on every axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Remove(ScottPlot.Edge)">
+            <summary>
+            Remove all axes that lie on the given edge.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Remove(ScottPlot.IAxis)">
+            <summary>
+            Remove the given axis from the plot
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Remove(ScottPlot.IPanel)">
+            <summary>
+            Remove the given Panel
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.DateTimeTicksBottom">
+            <summary>
+            Remove all bottom axes, create a DateTime bottom axis, add it to the plot, and return it.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AddLeftAxis">
+            <summary>
+            Crete a new axis, add it to the plot, and return it
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AddRightAxis">
+            <summary>
+            Crete a new axis, add it to the plot, and return it
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AddBottomAxis">
+            <summary>
+            Crete a new axis, add it to the plot, and return it
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AddTopAxis">
+            <summary>
+            Crete a new axis, add it to the plot, and return it
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.InvertX">
+            <summary>
+            Adjust the horizontal axis so values descend from left to right
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.RectifyX">
+            <summary>
+            Adjust the horizontal axis so values ascend from left to right
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.InvertY">
+            <summary>
+            Adjust the vertical axis so values descend from bottom to top
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.RectifyY">
+            <summary>
+            Adjust the vertical axis so values ascend from bottom to top
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetLimits">
+            <summary>
+            Return the 2D axis limits for the default axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetLimits(ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the 2D axis limits for the given X/Y axis pair
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetLimits(ScottPlot.IAxes)">
+            <summary>
+            Return the 2D axis limits for the given X/Y axis pair
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetDataLimits">
+            <summary>
+            Return the 2D axis limits of data for all plottables using the default axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.GetDataLimits(ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the 2D axis limits of data for all plottables using the given axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.ReplaceNullAxesWithDefaults">
+            <summary>
+            Adds the default X and Y axes to all plottables with unset axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScale(System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Automatically scale all axes to fit the data in all plottables
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScale(ScottPlot.IXAxis,ScottPlot.IYAxis,System.Boolean,System.Boolean)">
+            <summary>
+            Autoscale the given axes to accommodate the data from all plottables that use them
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScaleExpand">
+            <summary>
+            Automatically expand the default axes to fit the data in all plottables.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScaleExpand(ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Automatically expand the provided axes to fit the data in all plottables.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScaleExpandX(ScottPlot.IXAxis)">
+            <summary>
+            Automatically expand the provided axes horizontally to fit the data in all plottables.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScaleExpandX">
+            <summary>
+            Automatically expand the default horizontal axis to fit the data in all plottables.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScaleExpandY(ScottPlot.IYAxis)">
+            <summary>
+            Automatically expand the provided axes vertically to fit the data in all plottables.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.AutoScaleExpandY">
+            <summary>
+            Automatically expand the default vertical axis to fit the data in all plottables.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Pan(ScottPlot.CoordinateOffset)">
+            <summary>
+            Adjust limits all axes to pan by the given distance in coordinate space
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Pan(ScottPlot.PixelOffset)">
+            <summary>
+            Adjust limits all axes to pan by the given distance in pixel space
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ScottPlot.AxisManager.Zoom(System.Double,System.Double)" -->
+        <!-- Badly formed XML comment ignored for member "M:ScottPlot.AxisManager.ZoomIn(System.Double,System.Double)" -->
+        <member name="M:ScottPlot.AxisManager.ZoomOut(System.Double,System.Double)">
+            <summary>
+            Zoom out so the new view is the given fraction of the original view
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.ZoomOutX(System.Double)">
+            <summary>
+            Zoom out so the new view is the given fraction of the original view
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.ZoomOutY(System.Double)">
+            <summary>
+            Zoom out so the new view is the given fraction of the original view
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Margins">
+            <summary>
+            Reset plot data margins to their default value.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Margins(System.Double,System.Double)">
+            <summary>
+            Define the amount of whitespace to place around the data area when calling <see cref="!:AutoScale()"/>.
+            Values are a fraction from 0 (tightly fit the data) to 1 (lots of whitespace).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.Margins(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Define the amount of whitespace to place around the data area when calling <see cref="!:AutoScale()"/>.
+            Values are a fraction from 0 (tightly fit the data) to 1 (lots of whitespace).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisManager.SquareUnits">
+            <summary>
+            Force pixels to have a 1:1 scale ratio.
+            This allows circles to always appear as circles and not stretched ellipses.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisPanels.AxisBase.Color(ScottPlot.Color)">
+            <summary>
+            Apply a single color to all axis components: label, tick labels, tick marks, and frame
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisPanels.AxisBase.DrawFrame(ScottPlot.RenderPack,ScottPlot.PixelRect,ScottPlot.Edge,ScottPlot.LineStyle)">
+            <summary>
+            Draw a line along the edge of an axis on the side of the data area
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Control.ContextMenuItem">
+            <summary>
+            Represents a single item in a right-click pop-up menu
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Control.InputBindings">
+            <summary>
+            This class defines which buttons and keys perform which actions to manipulate the plot.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.InputBindings.ShouldLockX(System.Collections.Generic.IEnumerable{ScottPlot.Control.Key})">
+            <summary>
+            Returns <see langword="true"/> if <paramref name="keys"/> contains the key which locks the X axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.InputBindings.ShouldLockY(System.Collections.Generic.IEnumerable{ScottPlot.Control.Key})">
+            <summary>
+            Returns <see langword="true"/> if <paramref name="keys"/> contains the key which locks the Y axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.InputBindings.ShouldZoomRectangle(ScottPlot.Control.MouseButton,System.Collections.Generic.IEnumerable{ScottPlot.Control.Key})">
+            <summary>
+            Returns <see langword="true"/> if the combination of pressed buttons and keys results in a click-drag zoom rectangle
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Control.Interaction">
+            <summary>
+            This class contains logic to perform plot manipulations in response to UI actions.
+            To customize how user inputs are interpreted, inherit and override functions in this class.
+            To customize behavior of actions, replace properties of <see cref="F:ScottPlot.Control.Interaction.Actions"/> with custom delegates.
+            To customize UI inputs, assign desired button and key properties of <see cref="F:ScottPlot.Control.Interaction.Inputs"/>.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Control.Interaction.Inputs">
+            <summary>
+            Buttons and keys in this object can be overwritten to customize actions for specific user input events.
+            (e.g., make left-click-drag zoom instead of pan)
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Control.Interaction.ActionsWhenDisabled">
+            <summary>
+            Stores the <see cref="F:ScottPlot.Control.Interaction.Actions"/> that were preseent when <see cref="M:ScottPlot.Control.Interaction.Disable"/> was called.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Control.Interaction.Actions">
+            <summary>
+            Delegates in this object can be overwritten with custom functions that manipulate the plot.
+            (e.g., changing the sensitivity of click-drag-zooming)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.Interaction.Disable">
+            <summary>
+            Disable all mouse interactivity
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.Interaction.Enable">
+            <summary>
+            Enable mouse interactivity using the default mouse actions
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.Interaction.Enable(ScottPlot.Control.PlotActions)">
+            <summary>
+            Enable mouse interactivity using custom mouse actions
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.Interaction.GetMouseCoordinates(ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the last observed location of the mouse in coordinate units
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Control.MouseState.MinimumDragDistance">
+            <summary>
+            A click-drag must exceed this number of pixels before it is considered a drag.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Control.MultiAxisLimitManager">
+            <summary>
+            This object remembers limits of all axes so it can restore them later.
+            It is used for mouse interaction to translate pixel distances 
+            to coordinate distances based on previous renders.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.MultiAxisLimitManager.Remember(ScottPlot.IAxis)">
+            <summary>
+            Remember the current limits of the given axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.MultiAxisLimitManager.Remember(System.Collections.Generic.IEnumerable{ScottPlot.IAxis})">
+            <summary>
+            Remember the current limits of all given axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.MultiAxisLimitManager.Remember(ScottPlot.Control.MultiAxisLimitManager)">
+            <summary>
+            Clear memory of previous axes and remember all the given axis limits
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Control.MultiAxisLimitManager.Apply(ScottPlot.Plot)">
+            <summary>
+            Update all axis limits of the given plot with those previously remembered
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Control.PlotActions">
+            <summary>
+            This object holds actions which manipulate the plot.
+            To customize plot manipulation behavior, replace these delegates with custom ones.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Control.StandardZoomRectangle">
+            <summary>
+            Logic for drawing the shaded region on the plot when the user middle-click-drags to zoom
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.Data">
+            <summary>
+            Fixed-length array used as a circular buffer to shift data in at the position defined by <see cref="P:ScottPlot.DataSources.DataStreamerSource.NextIndex"/>.
+            Values in this array should not be modified externally if <see cref="!:ManageAxisLimits"/> is enabled.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.NextIndex">
+            <summary>
+            Index in <see cref="P:ScottPlot.DataSources.DataStreamerSource.Data"/> where the next point will be added
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.Length">
+            <summary>
+            The fied number of visible data points to display
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.CountTotal">
+            <summary>
+            The total number of data points added
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.CountTotalOnLastRender">
+            <summary>
+            Total of data points added the last time this plottable was rendered.
+            This can be compared with <see cref="P:ScottPlot.DataSources.DataStreamerSource.CountTotal"/> to determine if a new render is required.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.DataMin">
+            <summary>
+            Minimum value of all known data (not just the data in view)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.DataSources.DataStreamerSource.DataMax">
+            <summary>
+            Maximum value of all known data (not just the data in view)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.DataStreamerSource.Add(System.Double)">
+            <summary>
+            Shift in a new Y value
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.DataStreamerSource.AddRange(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Shift in a collection of new Y values
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.DataStreamerSource.Clear(System.Double)">
+            <summary>
+            Clear the buffer by setting all Y points to the given value
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataSources.ScatterSourceCoordinatesArray">
+            <summary>
+            This data source manages X/Y points as a collection of coordinates
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.ScatterSourceCoordinatesArray.#ctor(ScottPlot.Coordinates[])">
+            <summary>
+            This data source manages X/Y points as a collection of coordinates
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataSources.ScatterSourceCoordinatesList">
+            <summary>
+            This data source manages X/Y points as a collection of coordinates
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.ScatterSourceCoordinatesList.#ctor(System.Collections.Generic.List{ScottPlot.Coordinates})">
+            <summary>
+            This data source manages X/Y points as a collection of coordinates
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataSources.ScatterSourceDoubleArray">
+            <summary>
+            This data source manages X/Y points as separate X and Y collections
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.ScatterSourceDoubleArray.#ctor(System.Double[],System.Double[])">
+            <summary>
+            This data source manages X/Y points as separate X and Y collections
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataSources.ScatterSourceGenericArray`2">
+            <summary>
+            This data source manages X/Y points as separate X and Y collections
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.ScatterSourceGenericArray`2.#ctor(`0[],`1[])">
+            <summary>
+            This data source manages X/Y points as separate X and Y collections
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataSources.ScatterSourceGenericList`2">
+            <summary>
+            This data source manages X/Y points as separate X and Y collections
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.ScatterSourceGenericList`2.#ctor(System.Collections.Generic.List{`0},System.Collections.Generic.List{`1})">
+            <summary>
+            This data source manages X/Y points as separate X and Y collections
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalInterpolation.InterpolateBeforeX(ScottPlot.RenderPack,ScottPlot.Pixel[])">
+            <summary>
+            If the point to the left of the graph is extremely far outside the data area, 
+            modify it using interpolation so it's closer to the data area to prevent render artifacts.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalInterpolation.InterpolateBeforeY(ScottPlot.RenderPack,ScottPlot.Pixel[])">
+            <summary>
+            If the point to the bottom of the graph is extremely far outside the data area, 
+            modify it using interpolation so it's closer to the data area to prevent render artifacts.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalInterpolation.InterpolateAfterX(ScottPlot.RenderPack,ScottPlot.Pixel[])">
+            <summary>
+            If the point to the right of the graph is extremely far outside the data area, 
+            modify it using interpolation so it's closer to the data area to prevent render artifacts.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalInterpolation.InterpolateAfterY(ScottPlot.RenderPack,ScottPlot.Pixel[])">
+            <summary>
+            If the point to the top of the graph is extremely far outside the data area, 
+            modify it using interpolation so it's closer to the data area to prevent render artifacts.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetRangeY(System.Int32,System.Int32)">
+            <summary>
+            Return the vertical range covered by data between the given indices (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetIndex(System.Double)">
+            <summary>
+            Get the index associated with the given X position
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetIndex(System.Double,ScottPlot.IndexRange)">
+            <summary>
+            Get the index associated with the given X position limited to the given range
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetColumnPixelsX(System.Int32,ScottPlot.IndexRange,ScottPlot.RenderPack,ScottPlot.IAxes)">
+            <summary>
+            Given a pixel column, return the pixels to render its line.
+            If the column contains no data, no pixels are returned.
+            If the column contains one point, return that one pixel.
+            If the column contains multiple points, return 4 pixels: enter, min, max, and exit
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetColumnPixelsY(System.Int32,ScottPlot.IndexRange,ScottPlot.RenderPack,ScottPlot.IAxes)">
+            <summary>
+            Given a pixel column, return the pixels to render its line.
+            If the column contains no data, no pixels are returned.
+            If the column contains one point, return that one pixel.
+            If the column contains multiple points, return 4 pixels: enter, min, max, and exit
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetFirstPointX(ScottPlot.IAxes)">
+            <summary>
+            If data is off to the screen to the left, 
+            returns information about the closest point off the screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetFirstPointY(ScottPlot.IAxes)">
+            <summary>
+            If data is off to the screen to the bottom, 
+            returns information about the closest point off the screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetLastPointX(ScottPlot.IAxes)">
+            <summary>
+            If data is off to the screen to the right, 
+            returns information about the closest point off the screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.GetLastPointY(ScottPlot.IAxes)">
+            <summary>
+            If data is off to the screen to the top, 
+            returns information about the closest point off the screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.SearchIndex(System.Double)">
+            <summary>
+            Search the index associated with the given X position
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceDoubleArray.SearchIndex(System.Double,ScottPlot.IndexRange)">
+            <summary>
+            Search the index associated with the given X position limited to the given range
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.GetRangeY(System.Int32,System.Int32)">
+            <summary>
+            Return the vertical range covered by data between the given indices (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.GetIndexX(System.Double)">
+            <summary>
+            Get the index associated with the given X position
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.GetIndex(System.Double,ScottPlot.IndexRange)">
+            <summary>
+            Get the index associated with the given X position limited to the given range
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.GetColumnPixels(System.Int32,ScottPlot.IndexRange,ScottPlot.RenderPack,ScottPlot.IAxes)">
+            <summary>
+            Given a pixel column, return the pixels to render its line.
+            If the column contains no data, no pixels are returned.
+            If the column contains one point, return that one pixel.
+            If the column contains multiple points, return 4 pixels: enter, min, max, and exit
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.GetFirstPoint(ScottPlot.IAxes)">
+            <summary>
+            If data is off to the screen to the left, 
+            returns information about the closest point off the screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.GetLastPoint(ScottPlot.IAxes)">
+            <summary>
+            If data is off to the screen to the right, 
+            returns information about the closest point off the screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.SearchIndex(System.Double)">
+            <summary>
+            Search the index associated with the given X position
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DataSources.SignalXYSourceGenericArray`2.SearchIndex(System.Double,ScottPlot.IndexRange)">
+            <summary>
+            Search the index associated with the given X position limited to the given range
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataViews.IDataStreamerView">
+            <summary>
+            Contains logic for rendering fixed-length data in a streaming data logger.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Drawing">
+            <summary>
+            Common operations using the default rendering system.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:ScottPlot.DateTimeExtensions" -->
+        <member name="M:ScottPlot.DateTimeExtensions.ToDateTime(System.Double)">
+            <summary>
+            Convert a number that can be plotted on a numeric axis into a DateTime
+            </summary>
+        </member>
+        <member name="M:ScottPlot.DateTimeExtensions.ToNumber(System.DateTime)">
+            <summary>
+            Convert a DateTime into a number that can be plotted on a numeric axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Extensions.NumericExtensions.FiniteCoallesce(System.Double,System.Double)">
+            <summary>
+            Returns the fallback value if the given value is infinity
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Extensions.SkiaSharpExtensions.GetBitmap(ScottPlot.IColormap,System.Boolean)">
+            <summary>
+            Create a 1 by 256 bitmap displaying all values of a heatmap
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Fonts">
+            <summary>
+            Cross-platform tools for working with fonts
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Fonts.Default">
+            <summary>
+            This font is used for almost all text rendering.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Fonts.Sans">
+            <summary>
+            Name of a sans-serif font present on the system
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Fonts.Serif">
+            <summary>
+            Name of a serif font present on the system
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Fonts.Monospace">
+            <summary>
+            Name of a monospace font present on the system
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Fonts.System">
+            <summary>
+            The default font on the system
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Fonts.Exists(System.String)">
+            <summary>
+            Returns true if the given font is present on the system
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Fonts.Detect(System.String)">
+            <summary>
+            Use the characters in the string to detetermine an installed system font 
+            most likely to support this character set. 
+            Returns the system <see cref="P:ScottPlot.Fonts.Default"/> font if an ideal font cannot be determined.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Fonts.ConvertTextElementToUtf32CodePoints(System.String)">
+            <summary>
+            Take a single text element ("grapheme cluster") as input,
+            and return one or more Unicode code points.
+            The code points are represented with signed ints since that is idiomatic for C#,
+            even though they are always unsigned values.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Generate">
+            <summary>
+            This class contains methods which generate sample data for testing and demonstration purposes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.Consecutive(System.Int32,System.Double,System.Double)">
+            <summary>
+            Return an array of evenly-spaced numbers
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.Sin(System.Int32,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Return an array of sine waves between -1 and 1.
+            Values are multiplied by <paramref name="mult"/> then shifted by <paramref name="offset"/>.
+            Phase shifts the sine wave horizontally between 0 and 2 Pi.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.Cos(System.Int32,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Return an array of cosine waves between -1 and 1.
+            Values are multiplied by <paramref name="mult"/> then shifted by <paramref name="offset"/>.
+            Phase shifts the sine wave horizontally between 0 and 2 Pi.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.NoisyExponential(System.Int32,System.Double,System.Double,System.Double)">
+            <summary>
+            An exponential curve that rises from 0 to <paramref name="mult"/> 
+            over <paramref name="count"/> points with random positive noise that scales
+            with the underlying signal. The rate constant of the exponential
+            curve is <paramref name="tau"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.Consecutive2D(System.Int32,System.Int32,System.Double,System.Double)">
+            <summary>
+            Generates a 2D array of numbers with constant spacing.
+            </summary>
+            <param name="rows"></param>
+            <param name="columns"></param>
+            <param name="spacing">The space between points.</param>
+            <param name="offset">The first point.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ScottPlot.Generate.Sin2D(System.Int32,System.Int32,System.Double,System.Double,System.Double)">
+            <summary>
+            Generates a 2D sine pattern.
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="xPeriod">Frequency factor in x direction.</param>
+            <param name="yPeriod">Frequency factor in y direction.</param>
+            <param name="multiple">Intensity factor.</param>
+        </member>
+        <member name="M:ScottPlot.Generate.Ramp2D(System.Int32,System.Int32,System.Double,System.Double)">
+            <summary>
+            Generate a 2D array in a diagonal gradient pattern
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomWalk(System.Int32,System.Double,System.Double)">
+            <summary>
+            Return a series of values starting with <paramref name="offset"/> and
+            each randomly deviating from the previous by at most <paramref name="mult"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomSample(System.Int32,System.Double,System.Double)">
+            <summary>
+            Return an array of <paramref name="count"/> random values 
+            from <paramref name="min"/> to <paramref name="max"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomInteger(System.Int32)">
+            <summary>
+            RandomSample integer between zero (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomInteger(System.Int32,System.Int32)">
+            <summary>
+            RandomSample integer between <paramref name="min"/> (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomIntegers(System.Int32,System.Int32)">
+            <summary>
+            RandomSample integers between zero (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomIntegers(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            RandomSample integers between <paramref name="min"/> (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomNumber">
+            <summary>
+            RandomSample integer between 0 (inclusive) and 1 (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomNumber(System.Double)">
+            <summary>
+            RandomSample integer between 0 (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomNumber(System.Double,System.Double)">
+            <summary>
+            RandomSample integer between <paramref name="min"/> (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomNumbers(System.Int32,System.Double)">
+            <summary>
+            Random numbers between zero (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomNumbers(System.Int32,System.Double,System.Double)">
+            <summary>
+            Random numbers between <paramref name="min"/> (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.AddNoise(System.Double[],System.Double)">
+            <summary>
+            Return a copy of the given array with random values added to each point
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.AddNoiseInPlace(System.Double[],System.Double)">
+            <summary>
+            Mutate the given array by adding a random value to each point
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Generate.DateTime">
+            <summary>
+            Contains methods for generating DateTime sequences
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Generate.DateTime.ExampleDate">
+            <summary>
+            Date of the first ScottPlot commit
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.DateTime.Consecutive(System.Int32,System.DateTime,System.TimeSpan)">
+            <summary>
+            Evenly-spaced DateTimes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Generate.RandomColor(System.Byte)">
+            <summary>
+            Generate a dark color by defining the maximum value to use for R, G, and B
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IAxes">
+            <summary>
+            This interface describes a pair of 1D axes.
+            It is intended to be stored inside <see cref="T:ScottPlot.IPlottable"/> objects,
+            defining which axes they use and providing logic for coordinate/pixel conversions.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IAxes.DataRect">
+            <summary>
+            Describes the region in the center of the figure where plottable data will be displayed.
+            This region is set by the renderer immediately before a Plottable's Render() method is called.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IAxis">
+            <summary>
+            This interface describes a 1D axis (horizontal or vertical).
+            Responsibilities include: min/max management, unit/pixel conversion, 
+            tick generation (and rendering), axis label rendering, 
+            and self-measurement for layout purposes.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IAxis.Range">
+            <summary>
+            Min/Max range currently displayed by this axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAxis.GetPixel(System.Double,ScottPlot.PixelRect)">
+            <summary>
+            Get the pixel position of a coordinate given the location and size of the data area
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAxis.GetCoordinate(System.Single,ScottPlot.PixelRect)">
+            <summary>
+            Get the coordinate of a pixel position given the location and size of the data area
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAxis.GetPixelDistance(System.Double,ScottPlot.PixelRect)">
+            <summary>
+            Given a distance in coordinate space, converts to pixel space
+            </summary>
+            <param name="coordinateDistance">A distance in coordinate units</param>
+            <param name="dataArea">The rectangle onto which the coordinates are mapped</param>
+            <returns>The same distance in pixel units</returns>
+        </member>
+        <member name="M:ScottPlot.IAxis.GetCoordinateDistance(System.Single,ScottPlot.PixelRect)">
+            <summary>
+            Given a distance in pixel space, converts to coordinate space
+            </summary>
+            <param name="pixelDistance">A distance in pixel units</param>
+            <param name="dataArea">The rectangle onto which the coordinates are mapped</param>
+            <returns>The same distance in coordinate units</returns>
+        </member>
+        <member name="P:ScottPlot.IAxis.TickGenerator">
+            <summary>
+            Logic for determining tick positions and formatting tick labels
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAxis.RegenerateTicks(ScottPlot.PixelLength)">
+            <summary>
+            Use the <see cref="P:ScottPlot.IAxis.TickLabelStyle"/> to generate ticks with ideal spacing.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IAxis.Label">
+            <summary>
+            The label is the text displayed distal to the ticks
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IAxisRule">
+            <summary>
+            These rules are applied just before each render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IColormap.Name">
+            <summary>
+            Full name for this colormap
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IColormap.GetColor(System.Double)">
+            <summary>
+            Returns the color of a position on this colormap (from 0 to 1).
+            Returns transparent if NaN.
+            Positions outside the range will be clamped.
+            </summary>
+            <param name="position">position from 0 (first color) to 1 (last color)</param>
+        </member>
+        <member name="M:ScottPlot.IColormap.GetColor(System.Double,ScottPlot.Range)">
+            <summary>
+            Returns the color of a position on this colormap (according to the given range).
+            Returns transparent if NaN.
+            Positions outside the range will be clamped.
+            </summary>
+            <param name="position">position relative to the given range</param>
+            <param name="range">range of values spanned by this colormap</param>
+        </member>
+        <member name="T:ScottPlot.IGrid">
+            <summary>
+            Implement this interface to create a custom grid
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IHasLegendText.LegendText">
+            <summary>
+            If populated, this text appears in the legend
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IHasLine">
+            <summary>
+            Classes with a <see cref="P:ScottPlot.IHasLine.LineStyle"/> can implement this
+            to guide addition of standard shortcuts to its most commonly used properties.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.ILayoutEngine">
+            <summary>
+            This interface describes a class that decides how to lay-out a collection of panels around the
+            edges of a figure and create a final layout containing size and position of all panels
+            and also the size and position of the data area.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IManagesAxisLimits">
+            <summary>
+            This interface is applied to plottables which modify axis limits at rendeer time.
+            The update method is called at render time before the ticks are calculated.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IMarker">
+            <summary>
+            Describes logic necessary to render a marker at a point
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IMarker.Fill">
+            <summary>
+            if the marker has a fill, this flag indicates whether it will be rendered
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IMarker.LineWidth">
+            <summary>
+            Line width (overriding the one in LineStyle).
+            Set to 0 to disable line rendering.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPalette.Colors">
+            <summary>
+            All colors in this palette
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPalette.Name">
+            <summary>
+            Display name
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPalette.Description">
+            <summary>
+            Additional information such as the source of this palette
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPalette.GetColor(System.Int32)">
+            <summary>
+            Return the Nth color (wrapping around if N is larger than the number of colors)
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IPanel">
+            <summary>
+            A panel is a rectangular region outside the data area of a plot.
+            Example panels include axes, colorbars, and titles
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPanel.IsVisible">
+            <summary>
+            If false, the panel will not be displayed or report any size
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPanel.MinimumSize">
+            <summary>
+            Disallow the panel to be smaller than this
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPanel.MaximumSize">
+            <summary>
+            Disallow the panel to be larger than this
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPanel.Measure">
+            <summary>
+            Return the size (in pixels) of the panel in the dimension perpendicular to the edge it lays on
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ScottPlot.IPanel.Edge">
+            <summary>
+            Indicates which edge of the data rectangle this panel lays on
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPanel.Render(ScottPlot.RenderPack,System.Single,System.Single)">
+            <summary>
+            Draw this panel on a canvas
+            </summary>
+            <param name="surface">contains the canvas to draw on</param>
+            <param name="dataRect">dimensions of the data area (pixel units)</param>
+            <param name="size">size of this panel (pixel units)</param>
+            <param name="offset">distance from the edge of this panel to the edge of the data area</param>
+        </member>
+        <member name="P:ScottPlot.IPanel.ShowDebugInformation">
+            <summary>
+            Enable this to display extra information on the axis to facilitate development
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPanel.GetPanelRect(ScottPlot.PixelRect,System.Single,System.Single)">
+            <summary>
+            Return the rectangle for this panel
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPanelExtensions.IsHorizontal(ScottPlot.IPanel)">
+            <summary>
+            Returns true for X axes (bottom and top)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPanelExtensions.IsVertical(ScottPlot.IPanel)">
+            <summary>
+            Returns true for Y axes (left and right)
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IPathStrategy">
+            <summary>
+            Strategy for generating a path that connects a collection of pixels
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlotControl.Plot">
+            <summary>
+            The <see cref="P:ScottPlot.IPlotControl.Plot"/> displayed by this interactive control
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotControl.Refresh">
+            <summary>
+            Render the plot and update the image
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlotControl.Interaction">
+            <summary>
+            Advanced options for configuring how user inputs manipulate the plot
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlotControl.Menu">
+            <summary>
+            Platform-specific logic for managing the context menu
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotControl.ShowContextMenu(ScottPlot.Pixel)">
+            <summary>
+            Launch the default pop-up menu (typically in response to a right-click) at the given position in the control
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlotControl.GRContext">
+            <summary>
+            Context for hardware-accelerated graphics (or null if not available)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotControl.DetectDisplayScale">
+            <summary>
+            Determine the DPI scaling ratio of the present display.
+            A value of 1.0 means no scaling, and 1.5 means 150% scaling.
+            This operation may be costly so do not call it frequently.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlotControl.DisplayScale">
+            <summary>
+            The value of the present display scaling.
+            Mouse positions are multiplied by this value for pixel/coordinate conversions.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotControl.Reset">
+            <summary>
+            Disposes the current Plot and creates a new one for the control
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotControl.Reset(ScottPlot.Plot)">
+            <summary>
+            Loads the given Plot into the control
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotInteraction.Disable">
+            <summary>
+            Disable all mouse interactivity
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotInteraction.Enable">
+            <summary>
+            Enable mouse interactivity using the default mouse actions
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlotInteraction.Enable(ScottPlot.Control.PlotActions)">
+            <summary>
+            Enable mouse interactivity using custom mouse actions
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IPlottable">
+            <summary>
+            Any object that renders shapes on the canvas using scale information from the axes must implement this interface.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlottable.IsVisible">
+            <summary>
+            Toggles whether this plottable is shown and contributes to the automatic axis limit detection.
+            The calling method will check this variable (it does not need to be checked inside the Render method).
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlottable.Axes">
+            <summary>
+            This object performs coordinate/pixel translation at render time based on the latest data area.
+            It stores the axes to use for this plottable and also the data area (in pixels) updated just before each render.
+            If this object is null it will be constructed using the default X and Y axes at render time.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlottable.GetAxisLimits">
+            <summary>
+            Return the 2D area (in coordinate space) occupied by the data contained in this plottable
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlottable.Render(ScottPlot.RenderPack)">
+            <summary>
+            Draw the data from this plottable into the data area defined in the <see cref="P:ScottPlot.IPlottable.Axes"/>.
+            By default the surface is already clipped to the data area, but this can be cleared inside the plottable.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlottable.LegendItems">
+            <summary>
+            Items which will appear in the legend
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IPlottableGL">
+            <summary>
+            This interface is applied to plottables which can be rendered directly on the GPU using an OpenGL shader
+            </summary>
+        </member>
+        <member name="P:ScottPlot.IPlottableGL.PlotControl">
+            <summary>
+            The control used to display this plottable.
+            It is used to access the <see cref="T:SkiaSharp.GRContext"/> at render time.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IPlottableGL.GLFinish">
+            <summary>
+            Used to manually synchronize rendering
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IRenderLast.RenderLast(ScottPlot.RenderPack)">
+            <summary>
+            Plottables that implement this interface have a second render method that runs 
+            after the axes are drawn, allowing graphics to be placed on top of the axes.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IScatterSource">
+            <summary>
+            Represents a series of data points with distinct X and Y positions in coordinate space.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IScatterSource.GetScatterPoints">
+            <summary>
+            Return a copy of the data in <see cref="T:ScottPlot.Coordinates"/> format.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IScatterSource.GetNearest(ScottPlot.Coordinates,ScottPlot.RenderDetails,System.Single)">
+            <summary>
+            Return the point nearest a specific location given the X/Y pixel scaling information from a previous render.
+            Will return <see cref="P:ScottPlot.DataPoint.None"/> if the nearest point is greater than <paramref name="maxDistance"/> pixels away.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.ISignalSource">
+            <summary>
+            This interface is used by plottables to access data while rendering.
+            This interface describes Y data sampled along an X axis at a fixed period.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalSource.Period">
+            <summary>
+            X distance between Y points
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalSource.XOffset">
+            <summary>
+            X position of the first data point
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalSource.YOffset">
+            <summary>
+            Shift Y position of all values by this amount
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalSource.MaximumIndex">
+            <summary>
+            Do not display data above this index
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalSource.MinimumIndex">
+            <summary>
+            Do not display data below this index
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalSource.GetPixelColumn(ScottPlot.IAxes,System.Int32)">
+            <summary>
+            Returns range information about the data at a specific pixel location
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalSource.GetIndex(System.Double,System.Boolean)">
+            <summary>
+            Returns the predicted index for the data point nearest a given X position.
+            If clamped, the returned index will be clamped between 0 and Length - 1.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalSource.GetX(System.Int32)">
+            <summary>
+            Returns the X position for a given index.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalSource.GetY(System.Int32)">
+            <summary>
+            Returns the Y position for a given index.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalSource.GetYs">
+            <summary>
+            Return an object for working with all Y values.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalSource.GetYs(System.Int32,System.Int32)">
+            <summary>
+            Y values between a range of indexes (inclusive).
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalXYSource.XOffset">
+            <summary>
+            X position of the first data point
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalXYSource.YOffset">
+            <summary>
+            Shift Y position of all values by this amount
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalXYSource.MinimumIndex">
+            <summary>
+            Do not display data below this index
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalXYSource.MaximumIndex">
+            <summary>
+            Do not display data above this index
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ISignalXYSource.Rotated">
+            <summary>
+            If enabled, Xs will be vertical and Ys will be horizontal.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalXYSource.GetAxisLimits">
+            <summary>
+            Return the axis limits covered by these data
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalXYSource.GetPixelsToDraw(ScottPlot.RenderPack,ScottPlot.IAxes)">
+            <summary>
+            Return pixels to render to display this signal.
+            May return one extra point on each side of the plot outside the data area.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ISignalXYSource.GetNearest(ScottPlot.Coordinates,ScottPlot.RenderDetails,System.Single)">
+            <summary>
+            Return the point nearest a specific location given the X/Y pixel scaling information from a previous render.
+            Will return <see cref="P:ScottPlot.DataPoint.None"/> if the nearest point is greater than <paramref name="maxDistance"/> pixels away.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ITickGenerator.Ticks">
+            <summary>
+            Ticks to display the next time the axis is rendered.
+            This array and its contents should not be modified directly.
+            Call Regenerate() to update this array.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ITickGenerator.MaxTickCount">
+            <summary>
+            Do not generate more than this number of ticks
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ITickGenerator.Regenerate(ScottPlot.CoordinateRange,ScottPlot.Edge,ScottPlot.PixelLength,SkiaSharp.SKPaint,ScottPlot.Label)">
+            <summary>
+            Generate ticks based on the current settings and store the result in <see cref="P:ScottPlot.ITickGenerator.Ticks"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IVectorFieldSource.GetNearest(ScottPlot.Coordinates,ScottPlot.RenderDetails,System.Single)">
+            <summary>
+            Return the point nearest a specific location given the X/Y pixel scaling information from a previous render.
+            Will return <see cref="P:ScottPlot.DataPoint.None"/> if the nearest point is greater than <paramref name="maxDistance"/> pixels away.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IXAxis">
+            <summary>
+            Horizontal axis
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IYAxis">
+            <summary>
+            Vertical axis
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IO.BitmapHeader">
+            <summary>
+            This struct holds values that define the first several bytes of a bitmap file.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LayoutEngines.Automatic">
+            <summary>
+            Generate the layout by measuring all panels and adding
+            enough padding around the data area to fit them all exactly.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LayoutEngines.FixedDataArea">
+            <summary>
+            Generate a layout using a fixed rectangle for the data area
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutEngines.FixedDataArea.#ctor(ScottPlot.PixelRect)">
+            <summary>
+            Generate a layout using a fixed rectangle for the data area
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LayoutEngines.FixedPadding">
+            <summary>
+            Generate layouts where the data area has a fixed padding from the edge of the figure
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutEngines.FixedPadding.#ctor(ScottPlot.PixelPadding)">
+            <summary>
+            Generate layouts where the data area has a fixed padding from the edge of the figure
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LayoutEngines.MatchedDataRect">
+            <summary>
+            Generate layouts that match layouts of another control
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutEngines.MatchedDataRect.#ctor(ScottPlot.Plot)">
+            <summary>
+            Generate layouts that match layouts of another control
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LayoutManager">
+            <summary>
+            A collection of methods for making common adjustments to plot layouts
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutManager.Default">
+            <summary>
+            Automatically resize the layout on each render to acheive the best fit
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutManager.Fixed(ScottPlot.PixelRect)">
+            <summary>
+            Apply a fixed layout using the given rectangle to define the data area
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutManager.Fixed(ScottPlot.PixelPadding)">
+            <summary>
+            Apply a fixed layout using the given padding to define space between the
+            data area and the edge of the figure
+            </summary>
+        </member>
+        <member name="M:ScottPlot.LayoutManager.Frameless">
+            <summary>
+            Disable visibility of all axes and titles so the data area fills the entire figure
+            </summary>
+        </member>
+        <member name="T:ScottPlot.NamedColors.WebColors">
+            <summary>
+            Colors defined according to W3C standard keywords
+            https://www.w3.org/wiki/CSS/Properties/color/keywords
+            </summary>
+        </member>
+        <member name="T:ScottPlot.NamedColors.XkcdColors">
+            <summary>
+            Colors defined according to results of the xkcd color name survey
+            https://xkcd.com/color/rgb/
+            </summary>
+        </member>
+        <member name="T:ScottPlot.NumericConversion">
+            <summary>
+            This class contains type-specific methods to convert between generic values and doubles
+            optimized for performance using platform-specific features.
+            See discussion in https://github.com/ScottPlot/ScottPlot/pull/1927 
+            </summary>
+        </member>
+        <member name="M:ScottPlot.NumericConversion.GenericToDouble``1(``0@)">
+            <summary>
+            Returns the double value of a <typeparamref name="T"/> 
+            using a conversion technique optimized for the platform.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.NumericConversion.GenericToDouble``1(System.Collections.Generic.IReadOnlyList{``0},System.Int32)">
+            <summary>
+            Returns the double value of the <typeparamref name="T"/> at position <paramref name="i"/> in <paramref name="list"/>
+            using a conversion technique optimized for the platform.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.NumericConversion.GenericToDouble``1(``0[],System.Int32)">
+            <summary>
+            Returns the double value of the <typeparamref name="T"/> at position <paramref name="i"/> in <paramref name="array"/>
+            using a conversion technique optimized for the platform.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.NumericConversion.DoubleToGeneric``1(System.Double,``0@)">
+            <summary>
+            Creates a <typeparamref name="T"/> for a given double <paramref name="value"/>
+            using a conversion technique optimized for the platform.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Panels.ColorBar">
+            <summary>
+            An axis panel which displays a colormap and range of values
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Panels.ColorBar.#ctor(ScottPlot.IHasColorAxis,ScottPlot.Edge)">
+            <summary>
+            An axis panel which displays a colormap and range of values
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Panels.ColorBar.Axis">
+            <summary>
+            Axis (spine, ticks, label, etc) for the colorbar
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Panels.ColorBar.Width">
+            <summary>
+            Thickness of the colorbar image (in pixels)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Panels.ColorBar.Label">
+            <summary>
+            Title for the colorbar, displayed outside the ticks.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Panels.ColorBar.LabelStyle">
+            <summary>
+            Title for the colorbar, displayed outside the ticks.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Panels.ColorBar.GetPanelRect(ScottPlot.PixelRect,System.Single,System.Single)">
+            <summary>
+            Return a rectangle encapsulating the colormap
+            bitmap plus the axis and ticks.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Panels.ColorBar.GetColormapBitmapRect(ScottPlot.PixelRect,System.Single,System.Single)">
+            <summary>
+            Return the rectangle to the side of the data area
+            where the colormap bitmap will be drawn.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Panels.TitlePanel.VerticalPadding">
+            <summary>
+            Extra space to add above the title text so the title does not touch the edge of the image
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PathStrategies.CubicSpline">
+            <summary>
+            Connect points with Catmull-Rom cubic splines, see https://doi.org/10.1007/s42979-021-00770-x
+            NaN values will be skipped, producing a gap in the path.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PathStrategies.CubicSpline.GetSegments(System.Collections.Generic.IEnumerable{ScottPlot.Pixel})">
+            <summary>
+            Organize into segments of connected points padded with empty points at the front and back
+            </summary>
+            <param name="pixels">Pixels</param>
+            <returns>IEnumerable of arrays representing the segments</returns>
+        </member>
+        <member name="T:ScottPlot.PathStrategies.QuadHalfPoint">
+            <summary>
+            Connect points with curved lines which ease into and out of the midpoint between each pair.
+            This strategy does not "overshoot" points in the Y direction.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PathStrategies.Straight">
+            <summary>
+            Connect points with straight lines.
+            NaN values will be skipped, producing a gap in the path.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plot.Sync">
+            <summary>
+            This object is locked by the Render() methods.
+            Logic that manipulates the plot (UI inputs or editing data)
+            can lock this object to prevent rendering artifacts.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetPixel(ScottPlot.Coordinates)">
+            <summary>
+            Return the location on the screen (pixel) for a location on the plot (coordinates) on the default axes.
+            The figure size and layout referenced will be the one from the last render.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetPixel(ScottPlot.Coordinates,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the location on the screen (pixel) for a location on the plot (coordinates) on the given axes.
+            The figure size and layout referenced will be the one from the last render.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetCoordinates(ScottPlot.Pixel,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the coordinate for a specific pixel using measurements from the most recent render.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetCoordinates(System.Single,System.Single,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the coordinate for a specific pixel using measurements from the most recent render.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetCoordinateRect(System.Single,System.Single,System.Single,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return a coordinate rectangle centered at a pixel.  Uses measurements
+            from the most recent render.
+            <param name="x">Center point pixel's x</param>
+            <param name="y">Center point pixel's y</param>
+            <param name="radius">Radius in pixels</param>
+            <returns>The coordinate rectangle</returns>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetCoordinateRect(ScottPlot.Pixel,System.Single,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return a coordinate rectangle centered at a pixel.  Uses measurements
+            from the most recent render.
+            <param name="pixel">Center point pixel</param>
+            <param name="radius">Radius in pixels</param>
+            <returns>The coordinate rectangle</returns>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetCoordinateRect(ScottPlot.Coordinates,System.Single,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return a coordinate rectangle centered at a coordinate pair with the
+            radius specified in pixels.  Uses measurements from the most recent
+            render.
+            <param name="coordinates">Center point in coordinate units</param>
+            <param name="radius">Radius in pixels</param>
+            <returns>The coordinate rectangle</returns>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetAxis(ScottPlot.Pixel)">
+            <summary>
+            Get the axis under a given pixel
+            </summary>
+            <param name="pixel">Point</param>
+            <returns>The axis at <paramref name="pixel" /> (or null)</returns>
+        </member>
+        <member name="M:ScottPlot.Plot.GetPanel(ScottPlot.Pixel,System.Boolean)">
+            <summary>
+            Get the panel under a given pixel
+            </summary>
+            <param name="pixel">Point</param>
+            <returns>The panel at <paramref name="pixel" /> (or null)</returns>
+        </member>
+        <member name="M:ScottPlot.Plot.RenderInMemory(System.Int32,System.Int32)">
+            <summary>
+            Create a new image of the given dimensions, render the plot onto it, and return it.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Render(SkiaSharp.SKCanvas,System.Int32,System.Int32)">
+            <summary>
+            Render onto an existing canvas
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Render(SkiaSharp.SKCanvas,ScottPlot.PixelRect)">
+            <summary>
+            Render onto an existing canvas inside the given rectangle
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Render(SkiaSharp.SKSurface)">
+            <summary>
+            Render onto an existing canvas of a surface over the local clip bounds
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetImageHtml(System.Int32,System.Int32)">
+            <summary>
+            Render the plot and return an HTML img element containing a Base64-encoded PNG
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetLegendImage">
+            <summary>
+            Returns the content of the legend as a raster image
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetLegendSvgXml">
+            <summary>
+            Returns the content of the legend as SVG (vector) image
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetPlottables">
+            <summary>
+            Return contents of <see cref="P:ScottPlot.Plot.PlottableList"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.GetPlottables``1">
+            <summary>
+            Return all plottables in <see cref="P:ScottPlot.Plot.PlottableList"/> of the given type.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Remove(ScottPlot.IPlottable)">
+            <summary>
+            Remove the given plottable from the <see cref="P:ScottPlot.Plot.PlottableList"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Remove(ScottPlot.IPanel)">
+            <summary>
+            Remove the given Panel from the <see cref="P:ScottPlot.Plot.Axes"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Remove(ScottPlot.IAxis)">
+            <summary>
+            Remove the given Axis from the <see cref="P:ScottPlot.Plot.Axes"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Remove(System.Type)">
+            <summary>
+            Remove all items of a specific type from the <see cref="P:ScottPlot.Plot.PlottableList"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Remove``1">
+            <summary>
+            Remove a all instances of a specific type from the <see cref="P:ScottPlot.Plot.PlottableList"/>.
+            </summary>
+            <typeparam name="T">Type of <see cref="T:ScottPlot.IPlottable"/> to be removed</typeparam>
+        </member>
+        <member name="M:ScottPlot.Plot.Remove``1(System.Func{``0,System.Boolean})">
+            <summary>
+            Remove all instances of a specific type from the <see cref="P:ScottPlot.Plot.PlottableList"/> 
+            that meet the <paramref name="predicate"/> criteraia.
+            </summary>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <typeparam name="T">Type of <see cref="T:ScottPlot.IPlottable"/> to be removed</typeparam>
+        </member>
+        <member name="M:ScottPlot.Plot.MoveToTop(ScottPlot.IPlottable)">
+            <summary>
+            Move the indicated plottable to the end of the list so it is rendered last
+            </summary>
+            <param name="plottable"></param>
+        </member>
+        <member name="M:ScottPlot.Plot.HideGrid">
+            <summary>
+            Disable visibility for all grids
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.ShowGrid">
+            <summary>
+            Enable visibility for all grids
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.ShowLegend">
+            <summary>
+            Helper method for setting visibility of the <see cref="P:ScottPlot.Plot.Legend"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.ShowLegend(ScottPlot.Alignment)">
+            <summary>
+            Helper method for setting visibility of the <see cref="P:ScottPlot.Plot.Legend"/>
+            and setting <see cref="P:ScottPlot.Legend.Location"/> to the provided one.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.ShowLegend(ScottPlot.Alignment,ScottPlot.Orientation)">
+            <summary>
+            Helper method for setting the Legend's IsVisible, Alignment, and Orientation
+            properties all at once.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.ShowLegend(System.Collections.Generic.IEnumerable{ScottPlot.LegendItem},ScottPlot.Alignment)">
+            <summary>
+            Helper method for displaying specific items in the legend
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.HideLegend">
+            <summary>
+            Helper method for setting visibility of the <see cref="P:ScottPlot.Plot.Legend"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Clear">
+            <summary>
+            Clears the <see cref="P:ScottPlot.Plot.PlottableList"/> list
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.Title(System.String,System.Nullable{System.Single})">
+            <summary>
+            Shortcut to set text of the <see cref="!:TitlePanel"/> Label.
+            Assign properties of <see cref="!:TitlePanel"/> Label to customize size, color, font, etc.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.XLabel(System.String,System.Nullable{System.Single})">
+            <summary>
+            Shortcut to set text of the <see cref="T:ScottPlot.AxisPanels.BottomAxis"/> Label
+            Assign properties of <see cref="T:ScottPlot.AxisPanels.BottomAxis"/> Label to customize size, color, font, etc.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plot.YLabel(System.String,System.Nullable{System.Single})">
+            <summary>
+            Shortcut to set text of the <see cref="T:ScottPlot.AxisPanels.BottomAxis"/> Label
+            Assign properties of <see cref="T:ScottPlot.AxisPanels.BottomAxis"/> Label to customize size, color, font, etc.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PlottableAdder">
+            <summary>
+            Helper methods to create plottable objects and add them to the plot
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PlottableAdder.#ctor(ScottPlot.Plot)">
+            <summary>
+            Helper methods to create plottable objects and add them to the plot
+            </summary>
+        </member>
+        <member name="P:ScottPlot.PlottableAdder.Palette">
+            <summary>
+            Color set used for adding new plottables
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PlottableAdder.FillY(System.Double[],System.Double[],System.Double[])">
+            <summary>
+            Fill the vertical range between two Y points for each X point
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PlottableAdder.FillY(ScottPlot.Plottables.Scatter,ScottPlot.Plottables.Scatter)">
+            <summary>
+            Fill the vertical range between two Y points for each X point
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PlottableAdder.FillY(System.Collections.Generic.ICollection{System.ValueTuple{System.Double,System.Double,System.Double}})">
+            <summary>
+            Fill the vertical range between two Y points for each X point
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PlottableAdder.FillY``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.ValueTuple{System.Double,System.Double,System.Double}})">
+            <summary>
+            Fill the vertical range between two Y points for each X point
+            This overload uses a custom function to calculate X, Y1, and Y2 values
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.Base">
+            <summary>
+            ImagePosition of the base of the arrow in coordinate units
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.Tip">
+            <summary>
+            ImagePosition of the base of the arrowhead in coordinate units
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.LineStyle">
+            <summary>
+            Advanced styling options
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.Color">
+            <summary>
+            Color of the arrow line and arrowhead
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.LineWidth">
+            <summary>
+            Thickness of the line at the base of the arrow
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.ArrowheadWidth">
+            <summary>
+            Total width of the arrowhead in pixels
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.ArrowheadLength">
+            <summary>
+            Length of the arrowhead in pixels
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.MinimumLength">
+            <summary>
+            The base of the arrow will be expanded away from the tip so its length is always at least this number of pixels
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Arrow.Offset">
+            <summary>
+            Back the arrow away from its tip along its axis by this many pixels
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.BarPlot">
+            <summary>
+            Holds a collection of individually styled bars
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.BarPlot.Color">
+            <summary>
+            Apply a fill color to all bars
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.BarPlot.Horizontal">
+            <summary>
+            Define orientation for all bars
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.BoxPlot">
+            <summary>
+            Displays 1 or more boxes all styled the same
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ScottPlot.Plottables.Callout.CalculateClosestAttachPoint" -->
+        <member name="P:ScottPlot.Plottables.CandlestickPlot.Sequential">
+            <summary>
+            X position of candles is sourced from the OHLC's DateTime by default.
+            If this option is enabled, X position will be an ascending integers starting at 0 with no gaps.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.CandlestickPlot.SymbolWidth">
+            <summary>
+            Fractional width of the candle symbol relative to its time span
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.DataLogger.HasNewData">
+            <summary>
+            Returns true if data has been added since the last render
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataLogger.ViewFull">
+            <summary>
+            Automatically expand the axis as needed to ensure the full dataset is visible before each render.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataLogger.ViewJump(System.Double,System.Double)">
+            <summary>
+            Automatically adjust the axis limits to track the newest data as it comes in.
+            The axis limits will appear to "jump" when new data runs off the screen.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataLogger.ViewSlide(System.Double)">
+            <summary>
+            Automatically adjust the axis limits to track the newest data as it comes in.
+            The axis limits will appear to "slide" continuously as new data is added.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.DataStreamer.HasNewData">
+            <summary>
+            Returns true if data has been added since the last render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.DataStreamer.ManageAxisLimits">
+            <summary>
+            If enabled, axis limits will be adjusted automatically if new data runs off the screen.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.DataStreamer.AxisManager">
+            <summary>
+            Contains logic for automatically adjusting axis limits if new data runs off the screen.
+            Only used if <see cref="P:ScottPlot.Plottables.DataStreamer.ManageAxisLimits"/> is true.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.DataStreamer.Plot">
+            <summary>
+            Used to obtain the current axis limits so <see cref="P:ScottPlot.Plottables.DataStreamer.AxisManager"/> can adjust them if needed.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.DataStreamer.Renderer">
+            <summary>
+            Logic for displaying the fixed-length Y values in <see cref="P:ScottPlot.Plottables.DataStreamer.Data"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.Add(System.Double)">
+            <summary>
+            Shift in a new Y value
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.AddRange(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Shift in a collection of new Y values
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.Clear(System.Double)">
+            <summary>
+            Clear the buffer by setting all Y points to the given value
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.ViewWipeRight(System.Double)">
+            <summary>
+            Display the data using a view where new data overlapps old data from left to right.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.ViewWipeLeft">
+            <summary>
+            Display the data using a view where new data overlapps old data from right to left.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.ViewScrollLeft">
+            <summary>
+            Display the data using a view that continuously shifts data to the left, placing the newest data on the right.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.ViewScrollRight">
+            <summary>
+            Display the data using a view that continuously shifts data to the right, placing the newest data on the left.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.DataStreamer.ViewCustom(ScottPlot.DataViews.IDataStreamerView)">
+            <summary>
+            Display the data using a custom rendering function
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Ellipse.RadiusX">
+            <summary>
+            Horizontal radius (axis units)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Ellipse.RadiusY">
+            <summary>
+            Horizontal radius (axis units)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Ellipse.Rotation">
+            <summary>
+            Rotation of the ellipse (degrees)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.FillY.#ctor">
+            <summary>
+            Creates an empty RangePlot plot, call SetDataSource() to set the coordinates.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.FillY.#ctor(ScottPlot.Plottables.Scatter,ScottPlot.Plottables.Scatter)">
+            <summary>
+            Creates a RangePlot plot from two scatter plots.
+            </summary>
+            <param name="scatter1"></param>
+            <param name="scatter2"></param>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap._cellAlignment">
+            <summary>
+            Indicates position of the data point relative to the rectangle used to represent it.
+            An alignment of upper right means the rectangle will appear to the lower left of the point itself.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.Heatmap._extent">
+            <summary>
+            If defined, the this rectangle sets the axis boundaries of heatmap data.
+            Note that the actual heatmap area is 1 cell larger than this rectangle.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.Position">
+            <summary>
+            If defined, the this rectangle sets the axis boundaries of heatmap data.
+            Note that the actual heatmap area is 1 cell larger than this rectangle.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.Heatmap._flipRows">
+            <summary>
+            This variable controls whether row 0 of the 2D source array is the top or bottom of the heatmap.
+            When set to false (default), row 0 is the top of the heatmap.
+            When set to true, row 0 of the source data will be displayed at the bottom.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.Heatmap._flipColumns">
+            <summary>
+            This variable controls whether the first sample in each column of the 2D source array is the left or right of the heatmap.
+            When set to false (default), sample 0 is the left of the heatmap.
+            When set to true, sample 0 of the source data will be displayed at the right.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap._smooth">
+            <summary>
+            If true, pixels in the final image will be interpolated to give the heatmap a smooth appearance.
+            If false, the heatmap will appear as individual rectangles with sharp edges.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.AlignedExtent">
+            <summary>
+            Actual extent of the heatmap bitmap after alignment has been applied
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.ExtentOrDefault">
+            <summary>
+            Extent used at render time.
+            Supplies the user-provided extent if available, 
+            otherwise a heatmap centered at the origin with cell size 1.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.CellWidth">
+            <summary>
+            Width of a single cell from the heatmap (in coordinate units)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.CellHeight">
+            <summary>
+            Height of a single cell from the heatmap (in coordinate units)
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.Heatmap.Intensities">
+            <summary>
+            This object holds data values for the heatmap.
+            After editing contents users must call <see cref="M:ScottPlot.Plottables.Heatmap.Update"/> before changes
+            appear on the heatmap.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.NaNCellColor">
+            <summary>
+            Defines what color will be used to fill cells containing NaN.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.AlphaMap">
+            <summary>
+            If present, this array defines transparency for each cell in the heatmap.
+            Values range from 0 (transparent) through 255 (opaque).
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.Opacity">
+            <summary>
+            Controls the opacity of the entire heatmap from 0 (transparent) to 1 (opaque)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.Height">
+            <summary>
+            Height of the heatmap data (rows)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Heatmap.Width">
+            <summary>
+            Width of the heatmap data (columns)
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.Heatmap.Bitmap">
+            <summary>
+            Generated and stored when <see cref="M:ScottPlot.Plottables.Heatmap.Update"/> is called
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Heatmap.GetArgbValues">
+            <summary>
+            Return heatmap as an array of ARGB values,
+            scaled according to the heatmap setting,
+            and in the order necessary to create a bitmap.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Heatmap.Update">
+            <summary>
+            Regenerate the image using the present settings and data in <see cref="F:ScottPlot.Plottables.Heatmap.Intensities"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Heatmap.GetIndexes(ScottPlot.Coordinates)">
+            <summary>
+            Return the position in the array beneath the given point
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Heatmap.GetValue(ScottPlot.Coordinates)">
+            <summary>
+            Return the value of the cell beneath the given point.
+            Returns NaN if the point is outside the heatmap area.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.HorizontalLine">
+            <summary>
+            A line at a defined Y position that spans the entire horizontal space of the data area
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.HorizontalSpan">
+            <summary>
+            A horizontal span marks the full vertical range between two horizontal values
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.OhlcPlot.Sequential">
+            <summary>
+            X position of each symbol is sourced from the OHLC's DateTime by default.
+            If this option is enabled, X position will be an ascending integers starting at 0 with no gaps.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottables.OhlcPlot.SymbolWidth">
+            <summary>
+            Fractional width of the OHLC symbol relative to its time span
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.Polygon">
+            <summary>
+            A polygon is a collection of X/Y points that are all connected to form a closed shape.
+            Polygons can be optionally filled with a color or a gradient.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Polygon.#ctor(ScottPlot.Coordinates[])">
+            <summary>
+            Creates a new polygon.
+            </summary>
+            <param name="coords">The axis dependant vertex coordinates.</param>
+        </member>
+        <member name="F:ScottPlot.Plottables.Scatter.ConnectStyle">
+            <summary>
+            The style of lines to use when connecting points.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Scatter.Smooth">
+            <summary>
+            Controls whether points are connected by smooth or straight lines
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Scatter.SmoothTension">
+            <summary>
+            Setting this value enables <see cref="P:ScottPlot.Plottables.Scatter.Smooth"/> and sets the curve tension.
+            Low tensions tend to "overshoot" data points.
+            High tensions begin to approach connecting points with straight lines.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottables.Scatter.PathStrategy">
+            <summary>
+            Strategy to use for generating the path used to connect points
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Scatter.GetStepDisplayPixels(ScottPlot.Pixel[],System.Boolean)">
+            <summary>
+            Convert scatter plot points (connected by diagonal lines) to step plot points (connected by right angles)
+            by inserting an extra point between each of the original data points to result in L-shaped steps.
+            </summary>
+            <param name="points">Array of corner positions</param>
+            <param name="right">Indicates that a line will extend to the right before rising or falling.</param>
+        </member>
+        <member name="P:ScottPlot.Plottables.Signal.MaximumMarkerSize">
+            <summary>
+            Maximum size of the marker (in pixels) to display
+            at each data point when the plot is zoomed far in.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Signal.RenderLowDensity(ScottPlot.RenderPack)">
+            <summary>
+            Renders each point connected by a single line, like a scatter plot.
+            Call this when zoomed in enough that no pixel could contain two points.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottables.Signal.RenderHighDensity(ScottPlot.RenderPack)">
+            <summary>
+            Renders the plot by filling-in pixel columns according the extremes of Y data ranges.
+            Call this when zoomed out enough that one X pixel column may contain two or more points.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.VerticalLine">
+            <summary>
+            A line at a defined X position that spans the entire vertical space of the data area
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.VerticalSpan">
+            <summary>
+            A vertical span marks the full horizontal range between two vertical values
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottable.RadialGauge">
+            <summary>
+            This class represents a single radial gauge.
+            It has level and styling options and can be rendered onto an existing bitmap using any radius.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.StartAngle">
+            <summary>
+            Location of the base of the gauge (degrees)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.SweepAngle">
+            <summary>
+            Current level of this gauge (degrees)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.MaximumSizeAngle">
+            <summary>
+            Maximum angular size of the gauge (swept degrees)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.BackStartAngle">
+            <summary>
+            Angle where the background starts (degrees)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.Clockwise">
+            <summary>
+            If true angles end clockwise relative to their base
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.BackAngleSweep">
+            <summary>
+            Used internally to get the angle swept by the gauge background. It's equal to 360 degrees if CircularBackground is set to true. Also, returns a positive value is the gauge is drawn clockwise and a negative one otherwise
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.CircularBackground">
+            <summary>
+            If true the background will always be drawn as a complete circle regardless of MaximumSizeAngle
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.Font">
+            <summary>
+            Font used to render values at the tip of the gauge
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.FontSizeFraction">
+            <summary>
+            Size of the font relative to the line thickness
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.Label">
+            <summary>
+            Text to display on top of the label
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.LabelPositionFraction">
+            <summary>
+            Location of the label text along the length of the gauge.
+            Low values place the label near the base and high values place the label at its tip.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.Width">
+            <summary>
+            Size of the gauge (pixels)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.Color">
+            <summary>
+            Color of the gauge foreground
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.BackgroundColor">
+            <summary>
+            Color of the gauge background
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.StartCap">
+            <summary>
+            Style of the base of the gauge
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.EndCap">
+            <summary>
+            Style of the tip of the gauge
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.Mode">
+            <summary>
+            Defines the location of each gauge relative to the start angle and distance from the center
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGauge.ShowLabels">
+            <summary>
+            Indicates whether or not labels will be rendered as text
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottable.RadialGauge.Render(ScottPlot.RenderPack,System.Single)">
+            <summary>
+            Render the gauge onto an existing Bitmap
+            </summary>
+            <param name="gfx">active graphics object</param>
+        </member>
+        <member name="M:ScottPlot.Plottable.RadialGauge.ReduceAngle(System.Double)">
+            <summary>
+            Reduces an angle into the range [0°-360°].
+            Angles greater than 360 will roll-over (370º becomes 10º).
+            Angles less than 0 will roll-under (-10º becomes 350º).
+            </summary>
+            <param name="angle">Angle value</param>
+            <returns>Angle whithin [0°-360°]</returns>
+        </member>
+        <member name="T:ScottPlot.Plottable.RadialGaugePlot">
+            <summary>
+            A radial gauge chart is a graphical method of displaying scalar data in the form of 
+            a chart made of circular gauges so that each scalar is represented by each gauge.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.Levels">
+            <summary>
+            This array holds the original levels passed-in by the user. 
+            These levels are used to calculate radial gauge positions on every render.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.GaugeCount">
+            <summary>
+            Number of gauges.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.MaximumAngle">
+            <summary>
+            Maximum size (degrees) for the gauge.
+            180 is a semicircle and 360 is a full circle.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.CircularBackground">
+            <summary>
+            Controls whether the backgrounds of the gauges are full circles or stop at the maximum angle.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.Labels">
+            <summary>
+            Labels that appear in the legend for each gauge.
+            Number of labels must equal number of gauges.
+            May be null if gauges are not to appear in the legend.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.Colors">
+            <summary>
+            Colors for each gauge.
+            Number of colors must equal number of gauges.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.BackgroundTransparencyFraction">
+            <summary>
+            Describes how transparent the unfilled background of each gauge is (0 to 1).
+            The larger the number the darker the background becomes.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.Clockwise">
+            <summary>
+            Indicates whether gauges fill clockwise as levels increase.
+            If false, gauges will fill counter-clockwise (anti-clockwise).
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.GaugeMode">
+            <summary>
+            Determines whether the gauges are drawn stacked (dafault value), sequentially, or as a single gauge (ressembling a pie plot).
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.OrderInsideOut">
+            <summary>
+            Controls whether gauges will be dwan inside-out (true) or outside-in (false)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.LabelPositionFraction">
+            <summary>
+            Defines where the gauge label is written on the gage as a fraction of its length.
+            Low values place the label near the base and high values place the label at its tip.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.StartingAngle">
+            <summary>
+            Angle (degrees) at which the gauges start.
+            270° for North (default value), 0° for East, 90° for South, 180° for West, etc.
+            Expected values in the range [0°-360°], otherwise unexpected side-effects might happen.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.SpaceFraction">
+            <summary>
+            The empty space between gauges as a fraction of the gauge width.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.FontSizeFraction">
+            <summary>
+            Size of the gague label text as a fraction of the gauge width.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Plottable.RadialGaugePlot.Font">
+            <summary>
+            Describes labels drawn on each gauge.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.ShowLevels">
+            <summary>
+            Controls if value labels are shown inside the gauges.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.LevelTextFormat">
+            <summary>
+            String formatter to use for converting gauge levels to text
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.EndCap">
+            <summary>
+            Style of the tip of the gauge
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Plottable.RadialGaugePlot.StartCap">
+            <summary>
+            Style of the base of the gauge
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottable.RadialGaugePlot.Update(System.Double[],ScottPlot.Color[])">
+            <summary>
+            Replace gauge levels with new ones.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Plottable.RadialGaugePlot.GetGaugeAngles(System.Double[],System.Double,System.Double,System.Boolean,ScottPlot.RadialGaugeMode)">
+            <summary>
+            Calculate the rotational angles for each gauge from the original data values
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Alignment">
+            <summary>
+            Represents the location of a point relative to a rectangle.
+            UpperLeft means the point is at the top left of the rectangle.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ArrowStyle.ArrowheadWidth">
+            <summary>
+            Total width of the arrowhead in pixels
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ArrowStyle.ArrowheadLength">
+            <summary>
+            Length of the arrowhead in pixels
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ArrowStyle.MinimumLength">
+            <summary>
+            The arrow will always be rendered to be at least this long (in pixels).
+            If too small, it will gro according to the anchor.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.ArrowStyle.Offset">
+            <summary>
+            Back the arrow away from its tip along its axis by this many pixels
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Axes">
+            <summary>
+            This object holds an X axis and Y axis and performs 2D coordinate/pixel conversions
+            </summary>
+        </member>
+        <member name="T:ScottPlot.AxisLimits">
+            <summary>
+            This object represents the rectangular visible area on a 2D coordinate system.
+            It simply stores a <see cref="T:ScottPlot.CoordinateRect"/> but has axis-related methods to act upon it.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisLimits.Expanded(System.Double,System.Double)">
+            <summary>
+            Return a new <see cref="T:ScottPlot.AxisLimits"/> expanded to include the given <paramref name="x"/> and <paramref name="y"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisLimits.Expanded(ScottPlot.Coordinates)">
+            <summary>
+            Return a new <see cref="T:ScottPlot.AxisLimits"/> expanded to include the given <paramref name="coordinates"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisLimits.Expanded(ScottPlot.CoordinateRect)">
+            <summary>
+            Return a new <see cref="T:ScottPlot.AxisLimits"/> expanded to include all corners of the given <paramref name="rect"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AxisLimits.Expanded(ScottPlot.AxisLimits)">
+            <summary>
+            Return a new <see cref="T:ScottPlot.AxisLimits"/> expanded to include the area defined by <paramref name="limits"/>.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Bar">
+            <summary>
+            Represents a single bar in a bar chart
+            </summary>
+        </member>
+        <member name="T:ScottPlot.BarSeries">
+            <summary>
+            Holds a collection of bars which are all styled the same and have a common label
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Box">
+            <summary>
+            Holds values for drawing a box-and-whisker symbol
+            </summary>
+        </member>
+        <member name="T:ScottPlot.CanvasState">
+            <summary>
+            This object manages wraps a SKCanvas and manages calls
+            to SkiaSharp methods to ensure state is tracked across
+            complex render systems.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CanvasState.#ctor(SkiaSharp.SKCanvas)">
+            <summary>
+            This object manages wraps a SKCanvas and manages calls
+            to SkiaSharp methods to ensure state is tracked across
+            complex render systems.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.CanvasState.SaveLevels">
+            <summary>
+            Number of times <see cref="M:ScottPlot.CanvasState.Save"/> was called without <see cref="M:ScottPlot.CanvasState.Restore"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CanvasState.Save">
+            <summary>
+            Save the current state of the canvas.
+            This state can be recalled by calling <see cref="M:ScottPlot.CanvasState.Restore"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CanvasState.Restore">
+            <summary>
+            Restore the canvas to the state the last time <see cref="M:ScottPlot.CanvasState.Save"/> was called.
+            This method will throw if a canvas is restored more times than it was saved.
+            Use the <see cref="M:ScottPlot.CanvasState.RestoreAll"/> method to restore a canvas to its
+            original state if the number of saves is unknown.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CanvasState.RestoreAll">
+            <summary>
+            Restore the canvas to its original state, regardless
+            of how many times <see cref="M:ScottPlot.CanvasState.Save"/> was called.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CanvasState.DisableClipping">
+            <summary>
+            Restore the canvas to its original state.
+            Disables all clipping and transformations.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CanvasState.Clip(ScottPlot.PixelRect)">
+            <summary>
+            Clip the canvas so drawing will only occur within the given rectangle.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Color.Lighten(System.Double)">
+            <summary>
+            Amount to lighten the color (from 0-1).
+            Larger numbers produce lighter results.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Color.Darken(System.Double)">
+            <summary>
+            Amount to darken the color (from 0-1).
+            Larger numbers produce darker results.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Color.MixedWith(ScottPlot.Color,System.Double)">
+            <summary>
+            Return this color mixed with another color.
+            </summary>
+            <param name="otherColor">Color to mix with this color</param>
+            <param name="fraction">Fraction of <paramref name="otherColor"/> to use</param>
+            <returns></returns>
+        </member>
+        <member name="T:ScottPlot.Colors.Windows">
+            <summary>
+            Default Windows Colors
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Colors.Xkcd">
+            <summary>
+            Colors from the xkcd color name survey
+            https://xkcd.com/color/rgb/
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Colors.RandomHue(System.Int32)">
+            <summary>
+            Return a collection of colors with random hues.
+            Because hues are random, near-matches may be present.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Colors.Rainbow(System.Int32)">
+            <summary>
+            Return a collection of colors with maximum saturation and evenly-spaced hues
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ConnectStyle.Straight">
+            <summary>
+            Connect points with straight lines
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ConnectStyle.StepHorizontal">
+            <summary>
+            Connect points with a line horizontally, then vertically
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ConnectStyle.StepVertical">
+            <summary>
+            Connect points with a line vertically, then horizontally
+            </summary>
+        </member>
+        <member name="T:ScottPlot.CoordinateLine">
+            <summary>
+            Represents a straight line in coordinate space
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateLine.ExtendTo(ScottPlot.CoordinateRect)">
+            <summary>
+            Adjust the line to fit within the boundaries of the given rectangle.
+            The slope and Y intercept will not be changed.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateLine.X(System.Double)">
+            <summary>
+            Return the X position on the line at the given Y
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateLine.Y(System.Double)">
+            <summary>
+            Return the Y position on the line at the given X
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRange.MinMax(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Return the range of values spanned by the given collection
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRange.MinMaxNan(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Return the range of values spanned by the given collection (ignoring NaN)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRange.Expanded(System.Double)">
+            <summary>
+            Return a new range expanded to include the given point
+            </summary>
+        </member>
+        <member name="T:ScottPlot.CoordinateRangeMutable">
+            <summary>
+            Represents a range of values between two coordinates on a single axis
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRangeMutable.Contains(System.Double)">
+            <summary>
+            Returns true if the given position is within the range (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRangeMutable.Expand(System.Double)">
+            <summary>
+            Expand the range if needed to include the given point
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRangeMutable.Expand(ScottPlot.CoordinateRangeMutable)">
+            <summary>
+            Expand this range if needed to ensure the given range is included
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRangeMutable.Expand(ScottPlot.CoordinateRange)">
+            <summary>
+            Expand this range if needed to ensure the given range is included
+            </summary>
+        </member>
+        <member name="P:ScottPlot.CoordinateRangeMutable.NotSet">
+            <summary>
+            This infinite inverted range is used to indicate a range that has not yet been set
+            </summary>
+        </member>
+        <member name="M:ScottPlot.CoordinateRangeMutable.Reset">
+            <summary>
+            Reset this range to inverted infinite values to indicate the range has not yet been set
+            </summary>
+        </member>
+        <member name="T:ScottPlot.CoordinateRect">
+            <summary>
+            Describes a rectangle in 2D coordinate space.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Coordinates">
+            <summary>
+            Represents a point in coordinate space (X and Y axis units)
+            </summary>
+        </member>
+        <member name="T:ScottPlot.DataPoint">
+            <summary>
+            Represents a specific point in a DataSource
+            </summary>
+        </member>
+        <member name="M:ScottPlot.EdgeExtensions.IsHorizontal(ScottPlot.Edge)">
+            <summary>
+            True for bottom and top axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.EdgeExtensions.IsVertical(ScottPlot.Edge)">
+            <summary>
+            True for left and right axes
+            </summary>
+        </member>
+        <member name="T:ScottPlot.ExpandingAxisLimits">
+            <summary>
+            A stateful analog to <see cref="P:ScottPlot.ExpandingAxisLimits.AxisLimits"/> deisgned to expand to include given data
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.#ctor">
+            <summary>
+            Create a new set of expanding axis limits with no leimits set initially
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.#ctor(ScottPlot.AxisLimits)">
+            <summary>
+            Create a new set of expanding axis limits starting from the given axis limits
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.Expand(System.Double,System.Double)">
+            <summary>
+            Expanded limits to include the given <paramref name="x"/> and <paramref name="y"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.ExpandX(System.Double)">
+            <summary>
+            Expanded limits to include the given <paramref name="x"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.ExpandY(System.Double)">
+            <summary>
+            Expanded limits to include the given <paramref name="y"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.Expand(ScottPlot.Coordinates)">
+            <summary>
+            Expanded limits to include the given <paramref name="coordinates"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.ExpandingAxisLimits.Expand(System.Collections.Generic.IEnumerable{ScottPlot.Coordinates})">
+            <summary>
+            Expanded limits to include the given <paramref name="coordinates"/>.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.FillStyle">
+            <summary>
+            This configuration object (reference type) permanently lives inside objects which require styling.
+            It is recommended to use this object as an init-only property.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.FontStyle">
+            <summary>
+            This configuration object (reference type) permanently lives inside objects which require styling.
+            It is recommended to use this object as an init-only property.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.FontStyle.SetBestFont(System.String)">
+            <summary>
+            Use the characters in <paramref name="text"/> to determine an installed 
+            system font most likely to support this character set.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.GradientType">
+            <summary>
+            Describes the geometry of a color gradient used to fill an area
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.StartAngle">
+            <summary>
+            Get or set the start angle in degrees for sweep gradient
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.EndAngle">
+            <summary>
+            Get or set the end angle in degrees for sweep gradient
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.TileMode">
+            <summary>
+            Get or set how the shader should handle drawing outside the original bounds.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.AlignmentStart">
+            <summary>
+            Start of linear gradient
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.AlignmentEnd">
+            <summary>
+            End of linear gradient
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.Colors">
+            <summary>
+            Colors used for the gradient, or null to use the Hatch colors.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Gradient.ColorPositions">
+            <summary>
+            Get or set the positions (in the range of 0..1) of each corresponding color, 
+            or null to evenly distribute the colors.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.GradientType">
+            <summary>
+            Describes the geometry of a color gradient used to fill an area
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IAutoScaler">
+            <summary>
+            Contains logic for determining new axis limits when Autoscale() is called
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAutoScaler.GetAxisLimits(ScottPlot.Plot,ScottPlot.IXAxis,ScottPlot.IYAxis)">
+            <summary>
+            Return the recommended axis limits for the plottables that use the given axes
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAutoScaler.AutoScaleAll(System.Collections.Generic.IEnumerable{ScottPlot.IPlottable})">
+            <summary>
+            Autoscale every unset axis used by plottables.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IAxisLimitManager">
+            <summary>
+            An axis manager contains logic to suggest axis limits 
+            given the current view and size of the data.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IAxisLimitManager.GetAxisLimits(ScottPlot.AxisLimits,ScottPlot.AxisLimits)">
+            <summary>
+            Return recommended axis limits given the current view and size of the data
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Image">
+            <summary>
+            Bitmap representation of a <seealso cref="T:SkiaSharp.SKImage"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Image.GetBitmapBytes">
+            <summary>
+            SkiaSharp cannot natively create BMP files. 
+            This function creates bitmaps in memory manually.
+            https://github.com/mono/SkiaSharp/issues/320
+            </summary>
+        </member>
+        <member name="T:ScottPlot.ImagePosition">
+            <summary>
+            Describes how to size and position an image inside a given rectangle
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ImagePosition.TopLeft">
+            <summary>
+            Image placed at the upper-left of the rectangle with no scaling.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ImagePosition.Center">
+            <summary>
+            Image placed at the center of the rectangle with no scaling.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ImagePosition.Stretch">
+            <summary>
+            Fill image in X and Y to completely fill the area.
+            The aspect ratio may change, appearing to distort the image.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.ImagePosition.Fill">
+            <summary>
+            Scale the image as large as possible such that it will fit
+            entirely within the rectangle. This may result in whitespace
+            on the edges if the image and rectangle have different aspect ratios.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:ScottPlot.ImagePosition.Zoom" -->
+        <member name="M:ScottPlot.ImageScaleModeExtensions.GetRect(ScottPlot.ImagePosition,ScottPlot.PixelSize,ScottPlot.PixelRect)">
+            <summary>
+            Return the image rectangle to display inside a target rectangle
+            </summary>
+        </member>
+        <member name="T:ScottPlot.IndexRange">
+            <summary>
+            Represents a range of indexes in an array (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.IndexRange.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Represents a range of indexes in an array (inclusive)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Label.Rotation">
+            <summary>
+            Rotation in degrees clockwise from 0 (horizontal text)
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Label.LineSpacing">
+            <summary>
+            Manually defined line height in pixels.
+            If not defined, the default line spacing will be used (according to the typeface, size, etc.)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Label.SetBestFont">
+            <summary>
+            Use the characters in <see cref="P:ScottPlot.Label.Text"/> to determine an installed 
+            system font most likely to support this character set.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Label.GetRenderLocation(ScottPlot.PixelRect,ScottPlot.Alignment,System.Single,System.Single)">
+            <summary>
+            Use the Label's size and <see cref="P:ScottPlot.Label.Alignment"/> to determine where it should be drawn
+            relative to the given rectangle (aligned to the rectangle according to <paramref name="rectAlignment"/>).
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LabelStyleProperties">
+            <summary>
+            Classes with a <see cref="P:ScottPlot.LabelStyleProperties.LabelStyle"/> can inherit this
+            to include shortcuts to its most commonly used properties.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Layout.FigureRect">
+            <summary>
+            Size of the figure this layout represents
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Layout.DataRect">
+            <summary>
+            Final size of the data area
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Layout.PanelOffsets">
+            <summary>
+            Distance (pixels) each panel is to be placed from the edge of the data rectangle
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Layout.PanelSizes">
+            <summary>
+            Size (pixels) of each panel in the dimension perpendicular to the data edge it is placed on
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.Alignment">
+            <summary>
+            Position of the legend relative to the data area
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.Location">
+            <summary>
+            Position of the legend relative to the data area
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.Orientation">
+            <summary>
+            Stack items in the legend according to this preferred orientation
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.Margin">
+            <summary>
+            Distance from the edge of the data area to the edge of the legend
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.Padding">
+            <summary>
+            Distance between the legend frame and the items within it
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.SymbolWidth">
+            <summary>
+            Width of the symbol in a legend item
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.SymbolPadding">
+            <summary>
+            Padding between a symbol and label within a legend item
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.InterItemPadding">
+            <summary>
+            Space separating legend items
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.ManualItems">
+            <summary>
+            Items in this list will always be displayed in the legend
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.SetBestFontOnEachRender">
+            <summary>
+            Enabling this allows multi-language text in the figure legend,
+            but may slow down the render loop.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.FontSize">
+            <summary>
+            If set, this overrides the value in the LegendItem's FontStyle
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.FontName">
+            <summary>
+            If set, this overrides the value in the LegendItem's FontStyle
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Legend.FontColor">
+            <summary>
+            If set, this overrides the value in the LegendItem's FontStyle
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Legend.GetImage">
+            <summary>
+            Return an Image containing just the legend
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Legend.GetSvgXml">
+            <summary>
+            Return contents of a SVG image containing just the legend
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ScottPlot.Legend.Render(ScottPlot.RenderPack)">
+            <summary>
+            This is called automatically by the render manager
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Legend.Render(ScottPlot.RenderPack,ScottPlot.PixelRect,ScottPlot.Alignment)">
+            <summary>
+            Render the legend inside the given rectangle
+            </summary>
+            <param name="rp"></param>
+        </member>
+        <member name="T:ScottPlot.Line">
+            <summary>
+            Represents an line on screen defined by the endpoints, pattern, and style.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Line.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Create a default line using x and y values
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Line.#ctor(ScottPlot.Coordinates,ScottPlot.Coordinates)">
+            <summary>
+            Create a default line using coordinates
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Line.#ctor(System.Double,System.Double,System.Double,System.Double,ScottPlot.LineStyle)">
+            <summary>
+            Create a styled line using x and y values, LinePattern, and LineStyle information
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Line.#ctor(ScottPlot.Coordinates,ScottPlot.Coordinates,ScottPlot.LineStyle)">
+            <summary>
+            Create a styled line using coordinates, LinePattern, and LineStyle information
+            </summary>
+        </member>
+        <member name="T:ScottPlot.LineStyle">
+            <summary>
+            This configuration object (reference type) permanently lives inside objects which require styling.
+            It is recommended to use this object as an init-only property.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Location">
+            <summary>
+            Describes X/Y location in pixel or coordinate space
+            </summary>
+        </member>
+        <member name="T:ScottPlot.MarkerStyle">
+            <summary>
+            This configuration object (reference type) permanently lives inside objects which require styling.
+            It is recommended to use this object as an init-only property.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.MarkerStyle.Size">
+            <summary>
+            Diameter of the marker (in pixels)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Palette.FromColors(System.String[])">
+            <summary>
+            Create a custom palette from an array of colors
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Palette.FromColors(ScottPlot.Color[])">
+            <summary>
+            Create a custom palette from an array of colors
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Palette.GetPalettes">
+            <summary>
+            Return an array containing every available palette
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Pixel">
+            <summary>
+            Represents an X/Y location on screen in pixel units.
+            Pixels in screen units are distinct from <see cref="T:ScottPlot.Coordinates"/> with axis units.
+            Pixels use <see cref="T:System.Single"/> precision, whereas <see cref="T:ScottPlot.Coordinates"/> use <see cref="T:System.Double"/> precision.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Pixel.X">
+            <summary>
+            Horizontal position on the screen in pixel units.
+            Larger numbers are farther right on the screen.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Pixel.Y">
+            <summary>
+            Vertical position on the screen in pixel units.
+            Larger numbers are lower on the screen.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Pixel.#ctor(System.Single,System.Single)">
+            <summary>
+            Create a pixel, casting <see cref="T:System.Double"/> values into ones with <see cref="T:System.Single"/> precision
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Pixel.#ctor(System.Double,System.Double)">
+            <summary>
+            Create a pixel, casting <see cref="T:System.Double"/> values into ones with <see cref="T:System.Single"/> precision
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Pixel.NaN">
+            <summary>
+            Represents an invalid pixel location
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Pixel.ToSKPoint">
+            <summary>
+            Convert the ScottPlot pixel to a SkiaSharp point
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PixelLength">
+            <summary>
+            Represents a distance in pixel units
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PixelLine">
+            <summary>
+            Describes a straight line in pixel space
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelLine.ExtendTo(ScottPlot.PixelRect)">
+            <summary>
+            Adjust the line to fit within the boundaries of the given rectangle.
+            The slope and Y intercept will not be changed.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelLine.X(System.Single)">
+            <summary>
+            Return the X position on the line at the given Y
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelLine.Y(System.Single)">
+            <summary>
+            Return the Y position on the line at the given X
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PixelOffset">
+            <summary>
+            Represents the distance from one pixel relative to another in pixel units.
+            Increasing X offset moves a pixel to the right.
+            Increasing Y offset moves a pixel downward.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelOffset.#ctor(System.Single,System.Single)">
+            <summary>
+            Represents the distance from one pixel relative to another in pixel units.
+            Increasing X offset moves a pixel to the right.
+            Increasing Y offset moves a pixel downward.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PixelPadding">
+            <summary>
+            Represents the size (in pixels) of padding on all edges of a rectangle
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PixelRangeX">
+            <summary>
+            Represents a range of pixels between two pixels on the horizontal axis.
+            The value of <see cref="P:ScottPlot.PixelRangeX.Left"/> will be SMALLER than the value of <see cref="P:ScottPlot.PixelRangeX.Right"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRangeX.#ctor(System.Single,System.Single)">
+            <summary>
+            Represents a range of pixels between two pixels on the horizontal axis.
+            The value of <see cref="P:ScottPlot.PixelRangeX.Left"/> will be SMALLER than the value of <see cref="P:ScottPlot.PixelRangeX.Right"/>.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.PixelRangeY">
+            <summary>
+            Represents a range of pixels between two pixels on the vertical axis used in Signal plots.
+            The value of <see cref="P:ScottPlot.PixelRangeY.Top"/> will be SMALLER than the value of <see cref="P:ScottPlot.PixelRangeY.Bottom"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRangeY.#ctor(System.Single,System.Single)">
+            <summary>
+            Represents a range of pixels between two pixels on the vertical axis used in Signal plots.
+            The value of <see cref="P:ScottPlot.PixelRangeY.Top"/> will be SMALLER than the value of <see cref="P:ScottPlot.PixelRangeY.Bottom"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.Pixel,System.Single)">
+            <summary>
+            Create a rectangle from the bounding box of a circle centered at <paramref name="center"/> with radius <paramref name="radius"/>
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.Pixel,ScottPlot.Pixel)">
+            <summary>
+            Create a rectangle with edges at the given pixel positions.
+            This constructor will rectify the points so rectangles will always have positive area.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.Pixel,ScottPlot.PixelSize)">
+            <summary>
+            Create a rectangle representing pixels on a screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.PixelOffset,ScottPlot.PixelSize)">
+            <summary>
+            Create a rectangle representing pixels on a screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.Pixel,System.Single,System.Single)">
+            <summary>
+            Create a rectangle representing pixels on a screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.PixelSize)">
+            <summary>
+            Create a rectangle representing pixels on a screen
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Create a rectangle from the given edges.
+            This constructor permits inverted rectangles with negative area.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.#ctor(ScottPlot.PixelRangeX,ScottPlot.PixelRangeY)">
+            <summary>
+            Create a pixel rectangle from two pixel ranges
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.AlignedInside(ScottPlot.PixelRect,ScottPlot.Alignment)">
+            <summary>
+            Return the position of this rectangle aligned inside a larger one
+            </summary>
+        </member>
+        <member name="M:ScottPlot.PixelRect.AlignedInside(ScottPlot.PixelRect,ScottPlot.Alignment,ScottPlot.PixelPadding)">
+            <summary>
+            Return the position of this rectangle aligned inside a larger one
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Platform.LaunchWebBrowser(System.String)">
+            <summary>
+            Launch a web browser to a URL using a command appropriate for the operating system
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RadialGaugeMode.Stacked">
+            <summary>
+            Successive gauges start outward from the center but start at the same angle
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RadialGaugeMode.Sequential">
+            <summary>
+            Successive gauges start outward from the center and start at sequential angles
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RadialGaugeMode.SingleGauge">
+            <summary>
+            Gauges are all the same distance from the center but start at sequential angles
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Range">
+            <summary>
+            Represents a range between any two finite values (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Range.Normalize(System.Double,System.Boolean)">
+            <summary>
+            Returns the given value as a fraction of the difference between Min and Max. This is a min-max feature scaling.
+            </summary>
+            <param name="value">The value to normalize</param>
+            <param name="clamp">If true, values outside of the range will be clamped onto the interval [0, 1].</param>
+            <returns>The normalized value</returns>
+        </member>
+        <member name="M:ScottPlot.Range.Clamp(System.Double)">
+            <summary>
+            Returns the given value clamped to the range (inclusive).
+            </summary>
+        </member>
+        <member name="T:ScottPlot.RenderDetails">
+            <summary>
+            Details about a completed render
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.FigureRect">
+            <summary>
+            Size of the plot image in pixel units
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.DataRect">
+            <summary>
+            Size of the data area of the plot in pixel units
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.Padding">
+            <summary>
+            Distance between the data area and the edge of the figure
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.Elapsed">
+            <summary>
+            Total time required to render this image
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.Timestamp">
+            <summary>
+            Time the render was completed
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.TimedActions">
+            <summary>
+            Each step of the render and how long it took to execute
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.AxisLimits">
+            <summary>
+            Axis limits of the primary axes for this render
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.PreviousAxisLimits">
+            <summary>
+            Axis limits of the primary axes for the previous render
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.AxisLimitsByAxis">
+            <summary>
+            Axis limits for every axis
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.PreviousAxisLimitsByAxis">
+            <summary>
+            Axis limits of all axes from the previous render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RenderDetails.AxisLimitsChanged">
+            <summary>
+            Indicates whether the axis view (coordinate units) of this render differs from the previous
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RenderDetails.SizeChanged">
+            <summary>
+            Indicates whether the size (pixels) of this render differs from the previous
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.Layout">
+            <summary>
+            Arrangement of all panels
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RenderDetails.Count">
+            <summary>
+            The number of total renders including this one
+            </summary>
+        </member>
+        <member name="T:ScottPlot.RootedCoordinateVector">
+            <summary>
+            Represents a vector at a point in coordinate space
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RootedCoordinateVector.#ctor(ScottPlot.Coordinates,System.Numerics.Vector2)">
+            <summary>
+            Represents a vector at a point in coordinate space
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RootedCoordinateVector.Angle">
+            <summary>
+            Angle of the vector in radians
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RootedCoordinateVector.MagnitudeSquared">
+            <summary>
+            Length of the vector squared in coordinate units
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RootedCoordinateVector.Magnitude">
+            <summary>
+            Length of the vector in coordinate units
+            </summary>
+        </member>
+        <member name="T:ScottPlot.RootedPixelVector">
+            <summary>
+            Represents a vector at a point in pixel space
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RootedPixelVector.#ctor(ScottPlot.Pixel,System.Numerics.Vector2)">
+            <summary>
+            Represents a vector at a point in pixel space
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RootedPixelVector.Angle">
+            <summary>
+            Angle of the vector in radians
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RootedPixelVector.MagnitudeSquared">
+            <summary>
+            Length of the vector squared in pixel units
+            </summary>
+        </member>
+        <member name="P:ScottPlot.RootedPixelVector.Magnitude">
+            <summary>
+            Length of the vector in pixel units
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RandomDataGenerator.GlobalRandomThread">
+            <summary>
+            Global random number generator, to ensure each generator will returns different data.
+            Using ThreadLocal, because Random is not thread safe.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.RandomDataGenerator.Rand">
+            <summary>
+            To select right random number generator
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.#ctor(System.Nullable{System.Int32})">
+            <summary>
+            Create a random number generator.
+            The seed is random by default, but could be fixed to the defined value
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomNumber">
+            <summary>
+            Return a uniformly random number between 0 (inclusive) and 1 (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomNumber(System.Double)">
+            <summary>
+            Return a uniformly random number between 0 (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomNumber(System.Double,System.Double)">
+            <summary>
+            Return a uniformly random number between <paramref name="min"/> (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomNonZeroNumber(System.Double)">
+            <summary>
+            Return a random number guaranteed not to be zero
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomInteger">
+            <summary>
+            Return a random integer up to the maximum integer size
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomByte">
+            <summary>
+            Return a random byte (0-255)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomByte(System.Byte,System.Byte)">
+            <summary>
+            Return a random byte between the given values (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomInteger(System.Int32)">
+            <summary>
+            Return a random integer between zero (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomInteger(System.Int32,System.Int32)">
+            <summary>
+            Return a random integer between <paramref name="min"/> (inclusive) and <paramref name="max"/> (exclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomNormalNumber(System.Double,System.Double)">
+            <summary>
+            Return a number normally distributed around the given <paramref name="mean"/> 
+            according to the <paramref name="stdDev"/> standard deviation.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.AddNoiseInPlace(System.Double[],System.Double)">
+            <summary>
+            Mutate the given array by adding noise (± magnitude) and return it
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.AddNoise(System.Double[],System.Double)">
+            <summary>
+            Return a copy of the given data with random noise added (± magnitude)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomSample(System.Int32,System.Double,System.Double)">
+            <summary>
+            Uniformly distributed random numbers between 0 and 1
+            (multiplied by <paramref name="mult"/> then added to <paramref name="offset"/>).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomNormalSample(System.Int32,System.Double,System.Double)">
+            <summary>
+            Return a collection of numbers normally distributed around the given <paramref name="mean"/> 
+            according to the <paramref name="stdDev"/> standard deviation.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomSin(System.Int32)">
+            <summary>
+            Sine wave with random frequency, amplitude, and phase
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomWalk(System.Int32,System.Double,System.Double,System.Double)">
+            <summary>
+            A sequence of numbers that starts at <paramref name="offset"/> 
+            and "walks" randomly from one point to the next, scaled by <paramref name="mult"/>
+            with an approximate slope of <paramref name="slope"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomOHLCs(System.Int32)">
+            <summary>
+            Return a collection OHLCs representing random price action
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RandomDataGenerator.RandomOHLCs(System.Int32,System.DateTime)">
+            <summary>
+            Return a collection OHLCs representing random price action
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.RenderActions">
+            <summary>
+            This list of actions is performed in sequence to render a plot.
+            It may be modified externally to inject custom functionality.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.LastRender">
+            <summary>
+            Information about the previous render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.PreRenderLock">
+            <summary>
+            These events are invoked before any render action.
+            Users can add blocking code to this event to ensure processes
+            that modify plottables are complete before rendering begins.
+            Alternatively, lock the <see cref="P:ScottPlot.Plot.Sync"/> object.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.RenderStarting">
+            <summary>
+            This event is invoked just before each render, 
+            after axis limits are determined and axis limits are set
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.RenderFinished">
+            <summary>
+            This event is invoked after each render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.SizeChanged">
+            <summary>
+            This event a render where the figure size (in pixels) changed from the previous render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.AxisLimitsChanged">
+            <summary>
+            This event is invoked during a render where the axis limits (in coordinate units) changed from the previous render
+            This event occurs after render actions are performed.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.IsRendering">
+            <summary>
+            Indicates whether this plot is in the process of executing a render
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.EnableRendering">
+            <summary>
+            If false, any calls to Render() return immediately
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Rendering.RenderManager.RenderCount">
+            <summary>
+            Total number of renders completed
+            </summary>
+        </member>
+        <member name="T:ScottPlot.RenderPack">
+            <summary>
+            This object pairs a Plot with pixel/canvas information
+            and is passed throughout the render system to provide
+            screen and canvas information to methods performing rendering.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RenderPack.#ctor(ScottPlot.Plot,ScottPlot.PixelRect,SkiaSharp.SKCanvas)">
+            <summary>
+            This object pairs a Plot with pixel/canvas information
+            and is passed throughout the render system to provide
+            screen and canvas information to methods performing rendering.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.RenderPack.CalculateLayout">
+            <summary>
+            Uses the layout engine to measure panels and set the
+            Layout and DataRect for this render pack
+            </summary>
+        </member>
+        <member name="T:ScottPlot.SampleData">
+            <summary>
+            Sample data used for testing
+            </summary>
+        </member>
+        <member name="F:ScottPlot.SampleData.FirstHundredPrimes">
+            <summary>
+            The first 100 prime numbers
+            </summary>
+        </member>
+        <member name="M:ScottPlot.SampleData.MonaLisa">
+            <summary>
+            The Mona Lisa represented as as a 2D array (65 x 100) 
+            of grayscale values from 0 (dark) to 255 (bright)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.Sum(System.Double[])">
+            <summary>
+            Return the sample sum.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.Sum``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample sum.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.Mean(System.Double[])">
+            <summary>
+            Return the sample mean.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.Mean``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Return the sample mean.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.Variance(System.Double[])">
+            <summary>
+            Return the sample variance (second moment about the mean) of data.
+            Input must contain at least two values. 
+            Use this function when your data is a sample from a population.
+            To calculate the variance from the entire population use <see cref="M:ScottPlot.Statistics.Descriptive.VarianceP(System.Double[])"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.Variance``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample variance (second moment about the mean) of data.
+            Input must contain at least two values. 
+            Use this function to calculate the variance from the entire population. 
+            To estimate the variance from a sample, use <see cref="!:VarianceP&lt;T&gt;(IReadOnlyList&lt;T&gt;)()"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.VarianceP(System.Double[])">
+            <summary>
+            Return the sample variance (second moment about the mean) of data.
+            Input must contain at least two values. 
+            Use this function to calculate the variance from the entire population. 
+            To estimate the variance from a sample, use <see cref="M:ScottPlot.Statistics.Descriptive.Variance(System.Double[])"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.VarianceP``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample variance (second moment about the mean) of data.
+            Input must contain at least two values. 
+            Use this function to calculate the variance from the entire population. 
+            To estimate the variance from a sample, use <see cref="M:ScottPlot.Statistics.Descriptive.Variance``1(System.Collections.Generic.IReadOnlyList{``0})"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.StandardDeviation(System.Double[])">
+            <summary>
+            Return the sample standard deviation (the square root of the sample variance).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.StandardDeviation``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Return the sample standard deviation (the square root of the sample variance).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.StandardDeviationP(System.Double[])">
+            <summary>
+            Return the population standard deviation (the square root of the population variance).
+            See VarianceP() for more information.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.StandardDeviationP``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Return the population standard deviation (the square root of the population variance).
+            See VarianceP() for more information.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.StandardError``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Standard error of the mean.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.NanMean``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample mean. NaN values are ignored.
+            Returns NaN if all values are NaN.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.NanVariance``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample variance (second moment about the mean) of data.
+            Input must contain at least two values. NaN values are ignored.
+            Use this function when your data is a sample from a population.
+            To calculate the variance from the entire population use <see cref="M:ScottPlot.Statistics.Descriptive.VarianceP(System.Double[])"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.NanVarianceP``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample variance (second moment about the mean) of data.
+            Input must contain at least two values. NaN values are ignored.
+            Use this function when your data is a sample from a population.
+            To calculate the variance from the entire population use <see cref="M:ScottPlot.Statistics.Descriptive.VarianceP(System.Double[])"/>.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.NanStandardDeviation``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the sample standard deviation (the square root of the sample variance).
+            NaN values are ignored.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.NanStandardDeviationP``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Return the population standard deviation (the square root of the sample variance).
+            NaN values are ignored.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.NanStandardError``1(System.Collections.Generic.IReadOnlyList{``0})">
+            <summary>
+            Standard error of the mean.
+            NaN values are ignored.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.ArrayTranspose(System.Double[0:,0:])">
+            <summary>
+            Transpose a multidimensional (not jagged) array
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Descriptive.ArrayToVector(System.Double[0:,0:],System.Nullable{System.UInt32},System.Nullable{System.UInt32})">
+            <summary>
+            Extracts a row or column from a 2D array
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Statistics.Histogram.Counts">
+            <summary>
+            Number of values counted for each bin.
+            </summary>
+        </member>
+        <member name="F:ScottPlot.Statistics.Histogram.BinCount">
+            <summary>
+            Number of bins.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.Sum">
+            <summary>
+            Running total of all values counted.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.ValuesCounted">
+            <summary>
+            Total number of values accumulated.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.Bins">
+            <summary>
+            Lower edge for each bin.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.BinCenters">
+            <summary>
+            Center of each bin.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.AddOutliersToEdgeBins">
+            <summary>
+            Default behavior is that outlier values are not counted.
+            If this is enabled, min/max outliers will be counted in the first/last bin.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.Min">
+            <summary>
+            Lower edge of the first bin
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.Max">
+            <summary>
+            Upper edge of the last bin
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.BinSize">
+            <summary>
+            The calculated bin size.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.MinOutlierCount">
+            <summary>
+            Number of values that were smaller than the lower edge of the first bin.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Statistics.Histogram.MaxOutlierCount">
+            <summary>
+            Number of values that were greater than the upper edge of the last bin.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.#ctor(System.Double,System.Double,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Create a histogram which will count values supplied by <see cref="M:ScottPlot.Statistics.Histogram.Add(System.Double)"/> and <see cref="M:ScottPlot.Statistics.Histogram.AddRange(System.Collections.Generic.IEnumerable{System.Double})"/>
+            </summary>
+            <param name="min">minimum value to be counted</param>
+            <param name="max">maximum value to be counted</param>
+            <param name="binCount">number of bins between <paramref name="min"/> and <paramref name="max"/></param>
+            <param name="addOutliersToEdgeBins">if false, outliers will not be counted</param>
+            <param name="addFinalBin">if true, one more bin will be added so values equal to <paramref name="max"/> can be counted too</param>
+            <remarks>
+            If <paramref name="min"/> and <paramref name="max"/> are the same value, the <paramref name="min"/> and <paramref name="max"/>
+            properties will be <paramref name="min"/> - 0.5 and <paramref name="max"/> + 0.5, respectively. This is to handle an edge
+            case where all values of an array are exactly the same, producing an identical min and max.
+            </remarks>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.WithFixedBinSize(System.Double,System.Double,System.Double,System.Boolean)">
+            <summary>
+            Create a histogram with bins that can count data from <paramref name="min"/> to <paramref name="max"/> (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.WithFixedBinCount(System.Double,System.Double,System.Int32,System.Boolean)">
+            <summary>
+            Create a histogram with bins that can count data from <paramref name="min"/> to <paramref name="max"/> (inclusive)
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.GetProbability">
+            <summary>
+            Return counts normalized so the sum of all counts equals 1
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.GetProbabilityCurve(System.Double[],System.Boolean)">
+            <summary>
+            Return a function describing the probability function (a Gaussian curve fitted to the histogram probabilities).
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.GetNormalized(System.Double)">
+            <summary>
+            Return counts normalized so the maximum value equals the given value
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.GetCumulative">
+            <summary>
+            Return the cumulative histogram counts.
+            Each value is the number of counts in that bin and all bins below it.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.GetCumulativeProbability">
+            <summary>
+            Return the cumulative probability histogram.
+            Each value is the fraction of counts in that bin and all bins below it.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.Add(System.Double)">
+            <summary>
+            Add a single value to the histogram
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.AddRange(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Add multiple values to the histogram
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Histogram.Clear">
+            <summary>
+            Reset the histogram, setting all counts and values to zero
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.LinearRegression.#ctor(ScottPlot.Coordinates[])">
+            <summary>
+            Calculate the linear regression from a collection of X/Y coordinates
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.LinearRegression.#ctor(System.Double[],System.Double[])">
+            <summary>
+            Calculate the linear regression a paired collection of X and Y points
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.LinearRegression.#ctor(System.Double[],System.Double,System.Double)">
+            <summary>
+            Calculate the linear regression from a collection of evenly-spaced Y values
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.LinearRegression.GetValue(System.Double)">
+            <summary>
+            Return the Y point of the regression line for the given X position
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.LinearRegression.GetValues(System.Double[])">
+            <summary>
+            Return the Y points of the regression line for the given X positions
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Series.MovingAverage(System.Double[],System.Int32,System.Boolean)">
+            <summary>
+            Return a moving window average of the given data.
+            If original length is true, data will be padded with NaN.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Statistics.Series.SimpleMovingStandardDeviation(System.Double[],System.Int32,System.Boolean)">
+            <summary>
+            Return a moving window standard deviation of the given data.
+            If original length is true, data will be padded with NaN.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Stylers.FontStyler">
+            <summary>
+            Helper methods for setting fonts to all components of a plot
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Stylers.FontStyler.#ctor(ScottPlot.Plot)">
+            <summary>
+            Helper methods for setting fonts to all components of a plot
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Stylers.FontStyler.Set(System.String)">
+            <summary>
+            Apply the given font name to all existing plot objects.
+            Also sets the default font name so this font will be used for plot objects added in the future.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Stylers.FontStyler.Automatic">
+            <summary>
+            Detects the best font to apply to every label in the plot based on the characters the they contain.
+            If the best font for a label cannot be detected, the font last defined by <see cref="M:ScottPlot.Stylers.FontStyler.Set(System.String)"/> will be used.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Stylers.PlotStyler">
+            <summary>
+            Helper methods for applying common styling options to plots
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Stylers.PlotStyler.#ctor(ScottPlot.Plot)">
+            <summary>
+            Helper methods for applying common styling options to plots
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Stylers.PlotStyler.DarkMode">
+            <summary>
+            Reset colors and palette do a dark mode style
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Testing.DuplicateIdentifier`1">
+            <summary>
+            Helper class to detect for dupliate items in complex collections
+            and display helpful error messages to the console the facilitate debugging.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Testing.DuplicateIdentifier`1.#ctor(System.String)">
+            <summary>
+            Helper class to detect for dupliate items in complex collections
+            and display helpful error messages to the console the facilitate debugging.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.TickGenerators.DateTimeAutomatic.GenerateTicks(ScottPlot.CoordinateRange,ScottPlot.TickGenerators.ITimeUnit,System.Int32,ScottPlot.PixelSize,SkiaSharp.SKPaint,ScottPlot.Label)">
+            <summary>
+            This method attempts to find an ideal set of ticks.
+            If all labels fit within the bounds, the list of ticks is returned.
+            If a label doesn't fit in the bounds, the list is null and the size of the large tick label is returned.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.TickGenerators.ITimeUnit.Divisors">
+            <summary>
+            An array of integers that serve as good divisors to subdivide this time unit
+            </summary>
+        </member>
+        <member name="M:ScottPlot.TickGenerators.ITimeUnit.GetDateTimeFormatString">
+            <summary>
+            Returns the format string used to display tick labels of this time unit.
+            https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tostring
+            </summary>
+        </member>
+        <member name="M:ScottPlot.TickGenerators.ITimeUnit.Next(System.DateTime,System.Int32)">
+            <summary>
+            Return the DateTime N units relative to this one
+            </summary>
+        </member>
+        <member name="P:ScottPlot.TickGenerators.ITimeUnit.MinSize">
+            <summary>
+            Minimum span this time unit can represent.
+            To represent spans smaller than this, try the next smaller unit.
+            </summary>
+        </member>
+        <member name="M:ScottPlot.TickGenerators.ITimeUnit.Snap(System.DateTime)">
+            <summary>
+            Return a given date "snapped" back to the nearest nice tick position.
+            Use this to find a good tick position for a given DateTime.
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Version.VersionString">
+            <summary>
+            Version formatted like "5.0.0-beta"
+            </summary>
+        </member>
+        <member name="P:ScottPlot.Version.LongString">
+            <summary>
+            Version formatted like "ScottPlot 5.0.0-beta"
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Version.ShouldBe(System.Int32)">
+            <summary>
+            Throws an exception if this version of ScottPlot does not match the expected major version
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Version.ShouldBe(System.Int32,System.Int32)">
+            <summary>
+            Throws an exception if this version of ScottPlot does not match the expected major and minor versions
+            </summary>
+        </member>
+        <member name="M:ScottPlot.Version.ShouldBe(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Throws an exception if this version of ScottPlot does not match the exact one given
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.IsExternalInit">
+            <summary>
+            Allows init-only setters in older .NET versions
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiredMemberAttribute">
+            <summary>
+            Allows required members in older .NET versions
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute">
+            <summary>
+            Allows required members in older .NET versions
+            </summary>
+        </member>
+        <member name="T:PixelColumn">
+            <summary>
+            This data structure describes a single vertical column of pixels
+            that represents the Y span of an X range of data points.
+            </summary>
+        </member>
+    </members>
+</doc>

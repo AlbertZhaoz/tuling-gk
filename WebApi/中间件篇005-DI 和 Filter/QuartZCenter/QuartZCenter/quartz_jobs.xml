@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file contains job definitions in schema version 2.0 format s-->
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+	<processing-directives>
+		<overwrite-existing-data>true</overwrite-existing-data>
+	</processing-directives>
+	<schedule>
+		<!--**************************一个任务的开始t-->
+		<!--更短间隔，更详细配置，请使用RunFullFastQuartZ-->
+		<!--定义示例任务1 Job-->
+		<job>
+			<!--任务名称e-->
+			<name>ItemJob</name>
+			<!--任务组-->
+			<group>ItemJobGroup</group>
+			<!--当前任务描述-->
+			<description>任务</description>
+			<!--job-type,完整类名，命名空间，用逗号隔开，***重要v***-->
+			<job-type>QuartZCenter.TestJob,QuartZCenter</job-type>
+			<!--没有被trigger引用，也不会被销毁-->
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		<!--定义示例任务1 触发器 每3秒执行一次 ItemJob 任务e-->
+		<trigger>
+			<cron>
+				<!--定时器名称-->
+				<name>ItemJobTrigger</name>
+				<!--定时器组-->
+				<group>DItemJobTriggerGroup</group>
+				<!--指定JOB名-->
+				<job-name>ItemJob</job-name>
+				<!--指定JOB组-->
+				<job-group>ItemJobGroup</job-group>
+				<!--任务时间Cron表达式，最低时间为1秒，更多可百度参考Cron表达式用法n-->
+				<cron-expression>0/5 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+		<!--**************************一个任务的结束配置-->
+
+
+
+		<!--**************************一个任务的开始-->
+		<!--更短间隔，更详细配置，请使用RunFullFastQuartZ-->
+		<!--定义示例任务1 Job-->
+		<!--<job>
+			--><!--任务名称--><!--
+			<name>ItemJob1</name>
+			--><!--任务组--><!--
+			<group>ItemJobGroup</group>
+			--><!--当前任务描述--><!--
+			<description>任务</description>
+			--><!--job-type,完整类名，命名空间，用逗号隔开，***重要***--><!--
+			<job-type>QuartZCenter.TestJob1,QuartZCenter</job-type>
+			--><!--没有被trigger引用，也不会被销毁--><!--
+			<durable>true</durable>
+			<recover>false</recover>
+		</job>
+		--><!--定义示例任务1 触发器 每3秒执行一次 ItemJob 任务--><!--
+		<trigger>
+			<cron>
+				--><!--定时器名称--><!--
+				<name>ItemJobTrigger</name>
+				--><!--定时器组--><!--
+				<group>DItemJobTriggerGroup</group>
+				--><!--指定JOB名--><!--
+				<job-name>ItemJob1</job-name>
+				--><!--指定JOB组--><!--
+				<job-group>ItemJobGroup</job-group>
+				--><!--任务时间Cron表达式，最低时间为1秒，更多可百度参考Cron表达式用法--><!--
+				<cron-expression>0/1 * * * * ?</cron-expression>
+			</cron>
+		</trigger>-->
+		<!--**************************一个任务的结束配置-->
+
+
+	</schedule>
+</job-scheduling-data>

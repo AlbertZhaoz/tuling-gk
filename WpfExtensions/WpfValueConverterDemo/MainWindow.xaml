@@ -1,0 +1,24 @@
+﻿<Window x:Class="WpfValueConverterDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfValueConverterDemo"
+        xmlns:conv="clr-namespace:ValueConverters;assembly=ValueConverters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <conv:BoolToVisibilityConverter x:Key="CheckBox2Visibility" IsInverted="True" FalseValue="Hidden"/>
+
+        <conv:ValueConverterGroup x:Key="group1">
+            <conv:StringIsNotNullOrEmptyConverter/>
+            <conv:BoolInverter/>
+            <conv:BoolToVisibilityConverter IsInverted="True" FalseValue="Hidden"/>
+        </conv:ValueConverterGroup>
+
+    </Window.Resources>
+    <StackPanel>
+        <CheckBox x:Name="chb1"/>
+        <Button Visibility="{Binding ElementName=chb1,Path=IsChecked,Converter={StaticResource CheckBox2Visibility}}" Content="ch12Visibility"/>
+    </StackPanel>
+</Window>

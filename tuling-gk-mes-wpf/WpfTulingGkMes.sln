@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTulingGkMes", "WpfTulingGkMes.csproj", "{DB64583F-3E34-4302-8940-8CF24BA37080}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB64583F-3E34-4302-8940-8CF24BA37080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB64583F-3E34-4302-8940-8CF24BA37080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB64583F-3E34-4302-8940-8CF24BA37080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB64583F-3E34-4302-8940-8CF24BA37080}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D0EC498-7620-4A08-92A2-F9C5AEB5B76D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\bilibili.png" />
+    <None Remove="Images\bilibili_word.png" />
+    <None Remove="Images\close.png" />
+    <None Remove="Images\password.png" />
+    <None Remove="Images\qq.png" />
+    <None Remove="Images\user.png" />
+    <None Remove="Images\wechat.png" />
+    <None Remove="Images\weibo.png" />
+    <None Remove="Resource\Fonts\Yunmobei.ttf" />
+    <None Remove="Resource\Fonts\字魂剑气体.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\bilibili.png" />
+    <Resource Include="Images\bilibili_word.png" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\password.png" />
+    <Resource Include="Images\qq.png" />
+    <Resource Include="Images\user.png" />
+    <Resource Include="Images\wechat.png" />
+    <Resource Include="Images\weibo.png" />
+    <Resource Include="Resource\Fonts\Yunmobei.ttf" />
+    <Resource Include="Resource\Fonts\字魂剑气体.ttf" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfToolKitDemo.Views.Navigator1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfToolKitDemo.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:WpfToolKitDemo.ViewModels"
+        Title="Navigator1"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModels:Navigator1ViewModel />
+    </Window.DataContext>
+    <Border Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderBrush="LightGray"
+            BorderThickness="1"
+            CornerRadius="10">
+        <StackPanel Width="300">
+            <TextBlock HorizontalAlignment="Center" FontSize="28">Login</TextBlock>
+            <Separator Margin="0,10" />
+            <TextBlock>User name:</TextBlock>
+            <TextBox Margin="0,10"
+                     InputMethod.IsInputMethodEnabled="False"
+                     Text="{Binding UserName}" />
+            <TextBlock>Password:</TextBlock>
+            <PasswordBox Margin="0,10" Password="123456" />
+            <Button Command="{Binding LoginCommand}" Content="Login" />
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfBehaviors.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfBehaviors"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Border Width="80" Height="80" Background="Pink" Margin="49,230,671,125">
+            <b:Interaction.Behaviors>
+                <b:MouseDragElementBehavior/>
+                <local:BorderMouseEnterBehavior/>
+            </b:Interaction.Behaviors>
+        </Border>
+        <StackPanel>
+            <TextBox Name="tBox"/>
+            <Button Name="btn" Content="ClearText">
+                <b:Interaction.Behaviors>
+                    <local:ClearTextBoxTuBehaviors Target="{Binding ElementName=tBox}"/>
+                </b:Interaction.Behaviors>
+            </Button>
+            <TextBox Height="120">
+                <b:Interaction.Behaviors>
+                    <local:MouseWheel4FontSizeBehavior/>
+                </b:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</Window>

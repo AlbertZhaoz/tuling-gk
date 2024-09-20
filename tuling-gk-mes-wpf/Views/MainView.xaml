@@ -1,0 +1,861 @@
+﻿<Window
+    Height="800"
+    ResizeMode="NoResize"
+    Title="MainWindow"
+    Width="1200"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d"
+    x:Class="WpfTulingGkMes.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:conv="clr-namespace:ValueConverters;assembly=ValueConverters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:helpers="clr-namespace:WpfTulingGkMes.Helpers"
+    xmlns:local="clr-namespace:WpfTulingGkMes"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ucs="clr-namespace:WpfTulingGkMes.Ucs"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <b:Interaction.Behaviors>
+        <helpers:WindowGragBehavior />
+    </b:Interaction.Behaviors>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="95*" />
+        </Grid.RowDefinitions>
+
+        <!--  最上册信息栏  -->
+        <Grid Background="#2d8cf0">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*" />
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <Border BorderBrush="DarkGray" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            HorizontalAlignment="Center"
+                            Source="/Resources/Images/industry_1.png"
+                            VerticalAlignment="Center" />
+                        <TextBlock
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource TextBlockStyle}"
+                            Text="图灵技术官系统"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+
+                <StackPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Margin="2,0,0,0"
+                    Orientation="Horizontal">
+                    <Button Content="大屏看板" Style="{StaticResource BtnIndex}" />
+                    <Button Content="设备监控" Style="{StaticResource BtnIndex}" />
+                    <Button Content="帮助手册" Style="{StaticResource BtnIndex}" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center">
+                    <Button
+                        BorderBrush="Transparent"
+                        Height="22"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Width="22">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Resources/Images/actor.png" />
+                        </Button.Background>
+                    </Button>
+                    <Button
+                        BorderBrush="Transparent"
+                        Click="CanFdScreen"
+                        Height="22"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Width="22">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Resources/Images/indexFd.png" />
+                        </Button.Background>
+                    </Button>
+                    <Button
+                        BorderBrush="Transparent"
+                        Height="22"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Width="22">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Click">
+                                <b:CallMethodAction MethodName="Close" TargetObject="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Resources/Images/indexClose.png" />
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!--  主窗体  -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*" />
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  左侧菜单栏  -->
+            <Border
+                BorderBrush="DarkGray"
+                BorderThickness="1"
+                Grid.Column="0">
+
+                <hc:ScrollViewer
+                    IsInertiaEnabled="True"
+                    Margin="0,0,0,60"
+                    VerticalAlignment="Top"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Expander
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Foreground="White"
+                            IsExpanded="False"
+                            Margin="0,0,0,4"
+                            VerticalAlignment="Top">
+                            <Expander.Header>
+                                <Grid
+                                    Height="36"
+                                    ToolTip="数据查询"
+                                    Width="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Height="22"
+                                        HorizontalAlignment="Center"
+                                        Source="/Resources/Images/industry_2.png"
+                                        VerticalAlignment="Center"
+                                        Width="22"
+                                        x:Name="SystemSet" />
+                                    <Label
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        Content="数据查询"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Left"
+                                        Margin="0"
+                                        Padding="0"
+                                        VerticalAlignment="Center" />
+                                </Grid>
+                            </Expander.Header>
+                            <Border>
+                                <StackPanel>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="环形一线查询"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_5.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="环形一线查询    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="环形一线查询"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_6.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="环形二线查询    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="环形一线查询"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_8.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="防错信息查询    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="环形一线查询"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_4.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="环一返工查询    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="环形一线查询"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_3.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="环一返工查询    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </Expander>
+                        <Expander
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Foreground="White"
+                            IsExpanded="False"
+                            Margin="0,0,0,4"
+                            VerticalAlignment="Top">
+                            <Expander.Header>
+                                <Grid
+                                    Height="36"
+                                    ToolTip="设备管理"
+                                    Width="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Column="0"
+                                        Height="22"
+                                        HorizontalAlignment="Center"
+                                        Source="/Resources/Images/industry_2.png"
+                                        VerticalAlignment="Center"
+                                        Width="22" />
+                                    <Label
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        Content="设备管理"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Left"
+                                        Margin="0"
+                                        Padding="0"
+                                        VerticalAlignment="Center" />
+                                </Grid>
+                            </Expander.Header>
+                            <Border>
+                                <StackPanel>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="设备类型"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_5.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="设备类型    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Click="ButtonBase_OnClick"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="设备台账"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_6.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="设备台账    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                    <Button
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Foreground="White"
+                                        Height="36"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="0,1,0,0"
+                                        Tag="3"
+                                        ToolTip="设备相关"
+                                        hc:BorderElement.CornerRadius="0,0,0,0">
+                                        <Grid Width="110">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="0"
+                                                Height="22"
+                                                HorizontalAlignment="Center"
+                                                Source="/Resources/Images/industry_8.png"
+                                                VerticalAlignment="Center"
+                                                Width="22" />
+                                            <Label
+                                                Background="Transparent"
+                                                BorderBrush="Transparent"
+                                                BorderThickness="0"
+                                                Content="设备相关    "
+                                                Foreground="Black"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                Margin="0"
+                                                Padding="0"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </Expander>
+                    </StackPanel>
+                </hc:ScrollViewer>
+            </Border>
+
+            <!--  右侧 Tab 栏目  -->
+            <Grid Grid.Column="1">
+                <hc:TabControl
+                    Background="AliceBlue"
+                    BorderThickness="0,1,0,0"
+                    Name="ContentTabControl"
+                    Style="{StaticResource TabControlBaseStyle}">
+                    <hc:TabItem
+                        Background="AliceBlue"
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Header="大屏看板">
+                        <!--  大屏看板内容  -->
+                        <Grid>
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/Resources/Images/Kanban.png" />
+                            </Grid.Background>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="6*" />
+                                <RowDefinition Height="94*" />
+                            </Grid.RowDefinitions>
+
+                            <!--  最上面  -->
+                            <Border
+                                BorderBrush="#72b0cd"
+                                BorderThickness="0,0,0,1"
+                                Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Viewbox Height="50">
+                                        <hc:FlipClock Margin="20" />
+                                    </Viewbox>
+                                    <TextBlock
+                                        FontSize="35"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        Style="{StaticResource BasicTextBlockStyle}"
+                                        Text="生产管理系统看板" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Center"
+                                        Style="{StaticResource BasicTextBlockStyle}"
+                                        Text="产品型号:I型产品"
+                                        VerticalAlignment="Center" />
+                                </Grid>
+
+                            </Border>
+
+                            <!--  下方核心看板  -->
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="28*" />
+                                    <ColumnDefinition Width="80*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--  左侧 Left  -->
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.3*" />
+                                        <RowDefinition Height="0.4*" />
+                                        <RowDefinition Height="0.3*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Border
+                                        BorderBrush="#72b0cd"
+                                        BorderThickness="1"
+                                        CornerRadius="5"
+                                        Grid.Row="0"
+                                        Margin="0,10,0,0">
+                                        <StackPanel>
+                                            <TextBlock
+                                                FontSize="20"
+                                                HorizontalAlignment="Center"
+                                                Margin="4"
+                                                Style="{StaticResource BasicTextBlockStyle}"
+                                                Text="小时产量"
+                                                VerticalAlignment="Center" />
+                                            <lvc:CartesianChart
+                                                Background="Transparent"
+                                                Foreground="WhiteSmoke"
+                                                Height="200"
+                                                LegendLocation="Top"
+                                                Margin="5,10,5,0">
+                                                <lvc:CartesianChart.Series>
+                                                    <!--  设置Series的类型为 Line 类型, 该类型提供了一些折线图的实现  -->
+                                                    <lvc:LineSeries Title="8.8" Values="1,2,3,4,5,6" />
+                                                    <lvc:LineSeries Title="8.9" Values="2,4,6,8,10,12" />
+                                                    <lvc:LineSeries Title="8.10" Values="2,3,6,4,7,15" />
+                                                    <lvc:LineSeries Title="8.11" Values="3,4,3,4,13,4" />
+                                                </lvc:CartesianChart.Series>
+
+                                                <!--  定义Y轴  -->
+                                                <lvc:CartesianChart.AxisY>
+                                                    <!--  定义Y轴名称  -->
+                                                    <lvc:Axis ShowLabels="True" Title="Value">
+                                                        <lvc:Axis.Separator>
+                                                            <lvc:Separator Stroke="Transparent" StrokeThickness="1" />
+                                                        </lvc:Axis.Separator>
+                                                    </lvc:Axis>
+                                                </lvc:CartesianChart.AxisY>
+
+                                                <!--  定义X轴  -->
+                                                <lvc:CartesianChart.AxisX>
+                                                    <!--  定义X轴名称  -->
+                                                    <lvc:Axis ShowLabels="True" Title="Type">
+                                                        <lvc:Axis.Separator>
+                                                            <lvc:Separator Stroke="Transparent" StrokeThickness="1" />
+                                                        </lvc:Axis.Separator>
+                                                    </lvc:Axis>
+                                                </lvc:CartesianChart.AxisX>
+                                            </lvc:CartesianChart>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border
+                                        BorderBrush="#72b0cd"
+                                        BorderThickness="1"
+                                        CornerRadius="5"
+                                        Grid.Row="1"
+                                        Margin="0,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock
+                                                FontSize="20"
+                                                HorizontalAlignment="Center"
+                                                Margin="4"
+                                                Style="{StaticResource BasicTextBlockStyle}"
+                                                Text="产品分析"
+                                                VerticalAlignment="Center" />
+                                            <lvc:PieChart
+                                                Background="Transparent"
+                                                Foreground="WhiteSmoke"
+                                                Height="280"
+                                                Hoverable="False"
+                                                LegendLocation="Bottom"
+                                                Margin="5,5,5,0">
+                                                <lvc:PieChart.Series>
+                                                    <lvc:PieSeries
+                                                        DataLabels="True"
+                                                        LabelPoint="{Binding PointLabel}"
+                                                        Title="合格数量"
+                                                        Values="90" />
+                                                    <lvc:PieSeries
+                                                        DataLabels="True"
+                                                        LabelPoint="{Binding PointLabel}"
+                                                        Title="不合格数量"
+                                                        Values="2" />
+                                                    <lvc:PieSeries
+                                                        DataLabels="True"
+                                                        LabelPoint="{Binding PointLabel}"
+                                                        Title="待检数量"
+                                                        Values="8" />
+                                                </lvc:PieChart.Series>
+                                            </lvc:PieChart>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border
+                                        BorderBrush="#72b0cd"
+                                        BorderThickness="1"
+                                        CornerRadius="5"
+                                        Grid.Row="2"
+                                        Margin="0,0,0,2">
+                                        <StackPanel>
+                                            <TextBlock
+                                                FontSize="20"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,4,0,2"
+                                                Style="{StaticResource BasicTextBlockStyle}"
+                                                Text="设备监控"
+                                                VerticalAlignment="Center" />
+                                            <ucs:DeviceUc
+                                                ActiveTime="活动时间：2024-08-10"
+                                                DeviceName="环形1线设备整机状态"
+                                                IpAddress="IP地址：127.0.0.1"
+                                                Port="端口号：102" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <!--  中间核心面板  -->
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*" />
+                                        <RowDefinition Height="0.7*" />
+                                    </Grid.RowDefinitions>
+
+                                    <!--  计划产量  -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,27">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="10*" />
+                                                <RowDefinition Height="10*" />
+                                                <RowDefinition Height="5*" />
+                                            </Grid.RowDefinitions>
+
+                                            <Border
+                                                BorderBrush="#72b0cd"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Margin="10">
+                                                <StackPanel Margin="10" Width="200">
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="计划产量" />
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="500" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border
+                                                BorderBrush="#72b0cd"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Grid.Column="1"
+                                                Grid.Row="0"
+                                                Margin="10">
+                                                <StackPanel Margin="10" Width="200">
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="实际产量" />
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="400" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border
+                                                BorderBrush="#72b0cd"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Grid.Column="2"
+                                                Grid.Row="0"
+                                                Margin="10">
+                                                <StackPanel Margin="10" Width="200">
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="完成率" />
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="80%" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border
+                                                BorderBrush="#72b0cd"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Grid.Column="0"
+                                                Grid.Row="1"
+                                                Margin="10,10,10,0">
+                                                <StackPanel Margin="10" Width="200">
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="合格件数" />
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="90" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border
+                                                BorderBrush="#72b0cd"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Grid.Column="1"
+                                                Grid.Row="1"
+                                                Margin="10,10,10,0">
+                                                <StackPanel Margin="10" Width="200">
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="不合格数" />
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="2" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border
+                                                BorderBrush="#72b0cd"
+                                                BorderThickness="1"
+                                                CornerRadius="5"
+                                                Grid.Column="2"
+                                                Grid.Row="1"
+                                                Margin="10,10,10,0">
+                                                <StackPanel Margin="10" Width="200">
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="合格率" />
+                                                    <TextBlock
+                                                        FontSize="30"
+                                                        HorizontalAlignment="Center"
+                                                        Style="{StaticResource BasicTextBlockStyle}"
+                                                        Text="90%" />
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--  报警消息  -->
+                                            <hc:RunningBlock
+                                                BorderBrush="Transparent"
+                                                Content="5号设备异常，请联系图灵技术官检查"
+                                                FontSize="16"
+                                                FontWeight="Bold"
+                                                Foreground="Red"
+                                                Grid.Column="1"
+                                                Grid.Row="2"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,10,0,0"
+                                                VerticalAlignment="Center"
+                                                Width="700" />
+                                        </Grid>
+                                    </Grid>
+
+                                    <!--  工站检测  -->
+                                    <Grid Grid.Row="1">
+                                        <Border
+                                            BorderBrush="#72b0cd"
+                                            BorderThickness="1"
+                                            CornerRadius="5"
+                                            Margin="10,0,10,5">
+                                            <hc:GifImage Stretch="Fill" Uri="pack://application:,,,/Resources/Images/deviceRun.gif" />
+                                        </Border>
+
+                                    </Grid>
+                                </Grid>
+
+
+                            </Grid>
+                        </Grid>
+                    </hc:TabItem>
+                </hc:TabControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

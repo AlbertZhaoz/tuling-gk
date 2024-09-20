@@ -1,0 +1,38 @@
+﻿<Window x:Class="WpfPrismExtension.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        Title="{Binding Title}"
+        Width="525"
+        Height="350"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+        <Grid Background="AliceBlue">
+            <TextBlock Text="Header" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Background="Pink">
+                <TextBlock Text="Menu" />
+                <Button Command="{Binding ChangeViewACmd}" Content="ViewA" />
+                <Button Command="{Binding ChangeViewBCmd}" Content="ViewB" />
+                <Button Command="{Binding ChangePreviewCmd}" Content="Preview" />
+                <Button Command="{Binding ChangeForwardCmd}" Content="Forward" />
+                <Button Command="{Binding ShowDialogCmd}" Content="ShowDialog" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Background="Azure">
+                <ContentControl Height="200px" prism:RegionManager.RegionName="ContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="ContentRegionModule" />
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>

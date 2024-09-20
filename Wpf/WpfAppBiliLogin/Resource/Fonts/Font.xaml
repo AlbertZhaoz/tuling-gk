@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="Yunmobei">
+        /WpfAppBiliLogin;Component/Resource/Fonts/Yunmobei.ttf#Yunmobeifont
+    </FontFamily>
+    
+    <FontFamily x:Key="zhjq">
+        /WpfAppBiliLogin;Component/Resource/Fonts/字魂剑气体.ttf#字魂剑气手书(商用需授权)
+    </FontFamily>
+</ResourceDictionary>

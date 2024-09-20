@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfBindingDemo.Binding01"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfBindingDemo"
+        mc:Ignorable="d"
+        Title="Binding01" Height="450" Width="800">
+    <!--1.将控件作为绑定源-->
+    <StackPanel>
+        <TextBox x:Name="TextBoxInput" BorderBrush="Black"
+                 Margin="10" 
+                 Text="{Binding ElementName=SliderOne,Path=Value}"/>
+        <Slider x:Name="SliderOne" Minimum="0" Maximum="100"
+                Margin="10" IsSnapToTickEnabled="True"/>
+    </StackPanel>
+</Window>

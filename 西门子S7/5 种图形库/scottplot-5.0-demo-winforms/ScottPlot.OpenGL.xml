@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ScottPlot.OpenGL</name>
+    </assembly>
+    <members>
+        <member name="T:ScottPlot.AddPlottableExtensions">
+            <summary>
+            This class extends Plot.Add.* to add additional plottables provided by this NuGet package
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AddPlottableExtensions.ScatterGL(ScottPlot.PlottableAdder,ScottPlot.IPlotControl,System.Double[],System.Double[])">
+            <summary>
+            Add an OpenGL-accelerated scatter plot
+            </summary>
+        </member>
+        <member name="M:ScottPlot.AddPlottableExtensions.ScatterGLCustom(ScottPlot.PlottableAdder,ScottPlot.IPlotControl,System.Double[],System.Double[])">
+            <summary>
+            Add an OpenGL-accelerated scatter plot with customizable line width
+            </summary>
+        </member>
+        <member name="T:ScottPlot.OpenGL.GLFallbackRenderStrategy">
+            <summary>
+            Defines behavior to use when OpenGL is not available
+            </summary>
+        </member>
+        <member name="F:ScottPlot.OpenGL.GLFallbackRenderStrategy.Skip">
+            <summary>
+            Do not render anything
+            </summary>
+        </member>
+        <member name="F:ScottPlot.OpenGL.GLFallbackRenderStrategy.Software">
+            <summary>
+            Use software rendering (may be slow)
+            </summary>
+        </member>
+        <member name="T:ScottPlot.OpenGL.GLPrograms.LinesProgram">
+            <summary>
+            A lines program which draws effeciently but does not allow line width customization.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.OpenGL.GLPrograms.LinesProgramCustom">
+            <summary>
+            A lines program which allows customization of color and width
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.ScatterGL">
+            <summary>
+            This plot type uses an OpenGL shader for rendering.
+            </summary>
+        </member>
+        <member name="T:ScottPlot.Plottables.ScatterGLCustom">
+            <summary>
+            This plot type uses an OpenGL shader for rendering.
+            It extends <see cref="T:ScottPlot.Plottables.ScatterGL"/> to provide additional customizations.
+            </summary>
+        </member>
+    </members>
+</doc>

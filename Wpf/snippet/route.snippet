@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>路由事件代码段</Title>
+    <Author>Tuling</Author>
+    <Shortcut>roue</Shortcut>
+    <Description>生成默认的路由事件</Description>
+    <SnippetTypes>
+      <SnippetType>SurroundsWith</SnippetType>
+      <SnippetType>Expansion</SnippetType>
+    </SnippetTypes>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>type</ID>
+        <ToolTip>属性类型</ToolTip>
+        <Default>RoutedEventHandler</Default>
+      </Literal>
+      <Literal>
+        <ID>RoutedEventName</ID>
+        <ToolTip>属性名</ToolTip>
+        <Default>MyEvent</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="XML">
+      <![CDATA[
+      public event $type$ $RoutedEventName$
+      {
+      add{ AddHandler($RoutedEventName$Event, value); }
+      remove{ RemoveHandler($RoutedEventName$Event, value); }
+      }
+      
+      public static readonly RoutedEvent $RoutedEventName$Event=EventManager.RegisterRoutedEvent(
+      "$RoutedEventName$",RoutingStrategy.Bubble,typeof($type$),typeof(myclass));
+      ]]>
+    </Code>
+  </Snippet>
+</CodeSnippet>

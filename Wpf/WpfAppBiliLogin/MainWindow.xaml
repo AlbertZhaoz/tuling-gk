@@ -1,0 +1,104 @@
+﻿<Window x:Class="WpfAppBiliLogin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppBiliLogin"
+        mc:Ignorable="d"
+        
+        WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.35*"/>
+            <ColumnDefinition Width="0.65*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- 左侧布局具体实现 -->
+        <Border Grid.Column="0" CornerRadius="10,0,0,10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#00999A" Offset="0"/>
+                    <GradientStop Color="#0072C0" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+        <StackPanel Grid.Column="0">
+            <TextBlock Margin="0,100,0,30" Text="bilibili" Style="{StaticResource TextBlockStyle}" />
+            <TextBlock Margin="20,0,20,0"
+                       Text="Welcome to the bilibili.You can register by clicking the button below."
+                       TextWrapping="WrapWithOverflow" Foreground="White" TextAlignment="Center"
+                       LineHeight="25"/>
+            <Button Margin="0,80,0,0" Content="Sign Up" Foreground="White"
+                    Width="200"
+                    Background="Transparent" BorderBrush="White"/>
+        </StackPanel>
+        
+        <Canvas Grid.Column="0">
+            <Image Source="Images\bilibili_word.png" Width="40" Height="40" Canvas.Left="30" Canvas.Top="452"/>
+        </Canvas>
+        
+        <!-- 右侧布局具体实现 -->
+        <Border Grid.Column="1" CornerRadius="0,10,10,0" Background="WhiteSmoke"/>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Margin="0,100,0,25" Text="Sign in to bilibili"
+                       FontSize="32" FontFamily="Arial" TextAlignment="Center" FontWeight="Bold"
+                       Foreground="#0072C0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="Images\wechat.png" Width="40" Height="40"/>
+                </Button>
+                <Button Margin="5,0,5,0" Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="Images\weibo.png" Width="40" Height="40"/>
+                </Button>
+                <Button Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="Images\qq.png" Width="40" Height="40"/>
+                </Button>
+            </StackPanel>
+            <TextBlock Margin="0,15,0,0" Text="or use your account info:"
+                       TextWrapping="WrapWithOverflow" FontFamily="Arial" FontSize="14" 
+                       Foreground="#878787" TextAlignment="Center"/>
+            <Border Margin="0,30,0,0" Height="35" Width="340" BorderBrush="#878787"
+                    BorderThickness="1" CornerRadius="20">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="25" Height="25" Margin="5,0,0,0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Images\user.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBox Margin="5,0,0,0" Text="UserName"
+                             FontSize="20" FontFamily="Arial" TextAlignment="Left" VerticalAlignment="Center"
+                             Background="Transparent"
+                             Foreground="#878787" BorderBrush="Transparent" Width="288"/>
+                </StackPanel>
+            </Border>
+            <Border Margin="0,10,0,0" Height="35" Width="340" BorderBrush="#878787"
+                    BorderThickness="1" CornerRadius="20">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="25" Height="25" Margin="5,0,0,0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Images\password.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBox Margin="5,0,0,0" Text="Password"
+                             FontSize="20" FontFamily="Arial" TextAlignment="Left" VerticalAlignment="Center"
+                             Background="Transparent"
+                             Foreground="#878787" BorderBrush="Transparent" Width="288"/>
+                </StackPanel>
+            </Border>
+            <Button Style="{DynamicResource ButtonStyle1}" Margin="0,20,0,0" Width="180" Content="Sign In" 
+                    Background="#0072C0" Foreground="White" FontSize="16"/>
+        </StackPanel>
+        
+        <Canvas Grid.Column="1">
+            <Button Click="Button_Click" Background="Transparent" Canvas.Left="485" Canvas.Top="5"
+                    BorderBrush="Transparent">
+                <Image Source="Images\close.png" Width="25" Height="25"/>
+            </Button>
+        </Canvas>
+    </Grid>
+</Window>

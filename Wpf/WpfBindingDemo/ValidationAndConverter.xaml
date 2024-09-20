@@ -1,0 +1,49 @@
+﻿<Window x:Class="WpfBindingDemo.ValidationAndConverter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfBindingDemo"
+        mc:Ignorable="d"
+        Title="ValidationAndConverter" Height="450" Width="800">
+    <Window.Resources>
+        <local:TulingConverter x:Key="tct"/>
+    </Window.Resources>
+    <Grid>
+      <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+      </Grid.ColumnDefinitions>  
+        
+        <StackPanel Grid.Column="0">
+            <TextBox x:Name="textBoxOne"/>
+            <Slider Margin="0,5,0,5" 
+                    Minimum="-10"
+                    Maximum="100"
+                    x:Name="sliderOne" />
+            
+            <TextBox x:Name="textBox1" Text="1"/>
+            <TextBox x:Name="textBox2"/>
+            <TextBox x:Name="textBox3"/>
+            <TextBox x:Name="textBox4"/>
+            <Button x:Name="loginBtn" IsEnabled="false" Content="gsagdg"/>
+            
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1">
+            <ListBox x:Name="listBoxAks">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Width="50" Height="50" Source="{Binding Path=CategoryProp,
+                                Converter={StaticResource tct}}"/>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Content="ChangeAkun" Click="ChangeAkunMethod"/>
+        </StackPanel>
+    </Grid>
+    
+</Window>

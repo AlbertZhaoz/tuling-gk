@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfToolKitDemo.Views.NavigatorRoot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfToolKitDemo.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:WpfToolKitDemo.ViewModels"
+        Title="NavigatorRoot"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModels:NavigatorRootViewModel />
+    </Window.DataContext>
+    <ContentControl Content="{Binding CurrentViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type viewModels:Navigator1ViewModel}">
+                <local:Navigator1 />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:Navigator2ViewModel}">
+                <local:Navigator2 />
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
+</Window>

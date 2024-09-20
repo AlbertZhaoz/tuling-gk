@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTemplateStyleTrigger", "WpfTemplateStyleTrigger.csproj", "{4B8FBF6D-61D8-4905-91C3-D37A3A995CBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B8FBF6D-61D8-4905-91C3-D37A3A995CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8FBF6D-61D8-4905-91C3-D37A3A995CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8FBF6D-61D8-4905-91C3-D37A3A995CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8FBF6D-61D8-4905-91C3-D37A3A995CBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BCC9E2A-BCE2-41E0-8847-E409E4D3E421}
+	EndGlobalSection
+EndGlobal

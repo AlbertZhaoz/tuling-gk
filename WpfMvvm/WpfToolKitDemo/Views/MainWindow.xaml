@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfToolKitDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfToolKitDemo"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:WpfToolKitDemo.ViewModels"
+        Title="MainWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+    <StackPanel>
+        <TextBlock Text="{Binding Age}" />
+        <TextBlock Text="{Binding FirstName}" />
+        <TextBlock Text="{Binding LastName}" />
+        <TextBlock Text="{Binding FullName}" />
+        <CheckBox IsChecked="{Binding IsActive}" />
+        <Button Command="{Binding ChangeAgeCommand}" Content="ChangeAge" />
+        <Button Command="{Binding ChangeFirstNameCommand}" Content="ChangeFirstName" />
+        <Separator Width="200" />
+        <TextBlock Text="{Binding Title}" />
+        <TextBlock Text="{Binding ChangeTitleRequest.Id}" />
+        <TextBlock Text="{Binding ChangeTitleRequest.Status}" />
+        <TextBlock Text="{Binding ChangeTitleRequest.IsCanceled}" />
+        <TextBlock Text="{Binding ChangeTitleRequest.IsCompleted}" />
+        <TextBlock Text="{Binding ChangeTitleRequest.IsCompletedSuccessfully}" />
+        <Button Command="{Binding ChangeTitleCommand}" Content="ChangeTitle" />
+    </StackPanel>
+</Window>

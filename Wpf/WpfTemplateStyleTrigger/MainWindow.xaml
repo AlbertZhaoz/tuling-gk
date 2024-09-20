@@ -1,0 +1,36 @@
+﻿<Window x:Class="WpfTemplateStyleTrigger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTemplateStyleTrigger"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="840">
+    <StackPanel Orientation="Horizontal" Margin="5">
+        <UserControl ContentTemplate="{StaticResource carDetailTemplate}"
+                     Content="{Binding ElementName=listBoxCars,Path=SelectedItem}"/>
+        <ListBox x:Name="listBoxCars" Width="180" Margin="5,0"
+                 ItemTemplate="{StaticResource carListTemplate}"/>
+        <StackPanel>
+            <Button Style="{StaticResource MultiTrigger}"
+                    Content="MultiTrigger" Background="Gray" Margin="0,5"/>
+            <Button Style="{StaticResource MultiTrigger}"
+                    Content="MultiTriggerNotTrigger" Background="Gray"/>
+            <TextBox Style="{StaticResource DataTriggerStyle}" Margin="5" />
+            <Button Content="EventTrigger" Width="40" Height="40"
+                    Style="{StaticResource EventTriggerStyle}"/>
+            <Button Style="{DynamicResource ButtonStyle1}" Content="ControlTemplate" Width="40" Height="40" Margin="5"/>
+            <ListBox>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <TextBlock Text="Allan"/>
+                <TextBlock Text="Allan"/>
+                <TextBlock Text="Allan"/>
+                <TextBlock Text="Allan"/>
+            </ListBox>
+        </StackPanel>
+    </StackPanel>
+</Window>

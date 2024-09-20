@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfAppBiliLogin.ResourceDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppBiliLogin"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="ResourceDemo" Height="450" Width="800">
+    <Window.Resources>
+        <SolidColorBrush x:Key="SolidColorOne" Color="Gray"/>
+        <SolidColorBrush x:Key="SolidColorTwo" Color="Blue"/>
+        <system:Double x:Key="BtnWidth">100</system:Double>
+    </Window.Resources>
+    <Grid>
+       <!-- <Button Width="{StaticResource BtnWidth}" Content="ddd"/> -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Grid.Column="0" 
+                Background="{StaticResource SolidColorOne}"/>
+       <Border  Grid.Row="0" Grid.Column="1"
+               Background="{StaticResource SolidColorTwo}"/>
+       <Border Grid.Row="1" Grid.Column="0" 
+               Background="{DynamicResource SolidThree}"/>
+       <Border  Grid.Row="1" Grid.Column="1"
+                Background="{DynamicResource SolidFour}"/>
+        
+        <StackPanel >
+            <Button Content="ChangeResource" Width="100" Height="40" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

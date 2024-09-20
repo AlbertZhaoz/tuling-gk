@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfAppBiliLogin.ControlTemplateDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppBiliLogin"
+        mc:Ignorable="d"
+        Title="ControlTemplateDemo" Height="450" Width="800">
+    <Window.Resources>
+        <ControlTemplate x:Key="btnTemplate" TargetType="Button">
+            <StackPanel>
+                <Button Content="{TemplateBinding Content}"/>
+                <TextBlock Text="{TemplateBinding Tag}" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <Button Template="{StaticResource btnTemplate}" 
+                    Content="BtnOne" Width="100" Height="50" Tag="This is btnone tag."/>
+            <Button Style="{DynamicResource ButtonStyle1}" Background="AliceBlue"
+                    Content="BtnTwo" Width="100" Height="50" Tag="ddd"/>
+        </StackPanel>
+    </Grid>
+</Window>

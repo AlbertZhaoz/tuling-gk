@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<UserSecretsId>bb9be3d5-7b3e-4aa6-931f-5983ec33f347</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<!--指定是否要生成 XML 文档，用于 swagger 注释-->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!--NoWarn 元素禁用了警告 CS1591，该警告提示未将注释添加到公共类型或成员中-->
+		<NoWarn>$(NoWarn);1591</NoWarn>
+		<DocumentationFile>bin\Debug\netcoreapp3.1\swagger.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Controllers\SystemTool\**" />
+		<Compile Remove="quartz\**" />
+		<Compile Remove="Upload\**" />
+		<Content Remove="Controllers\SystemTool\**" />
+		<Content Remove="quartz\**" />
+		<Content Remove="Upload\**" />
+		<EmbeddedResource Remove="Controllers\SystemTool\**" />
+		<EmbeddedResource Remove="quartz\**" />
+		<EmbeddedResource Remove="Upload\**" />
+		<None Remove="Controllers\SystemTool\**" />
+		<None Remove="quartz\**" />
+		<None Remove="Upload\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="CZGL.ProcessMetrics.ASPNETCore" Version="1.1.0" />
+		<PackageReference Include="DotNetify.Pulse" Version="1.0.0" />
+		<PackageReference Include="IGeekFan.AspNetCore.Knife4jUI" Version="0.0.11" />
+		<PackageReference Include="MarkdownSharp" Version="2.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\VOL.Albert.BasicData\VOL.Albert.BasicData.csproj" />
+		<ProjectReference Include="..\VOL.Albert.DataAnalysis\VOL.Albert.DataAnalysis.csproj" />
+		<ProjectReference Include="..\VOL.Albert.DataQuery\VOL.Albert.DataQuery.csproj" />
+		<ProjectReference Include="..\VOL.Albert.Device\VOL.Albert.Device.csproj" />
+		<ProjectReference Include="..\VOL.Albert.EnergyManager\VOL.Albert.EnergyManager.csproj" />
+		<ProjectReference Include="..\VOL.Albert.Inbound\VOL.Albert.Inbound.csproj" />
+		<ProjectReference Include="..\VOL.Albert.ProductionManager\VOL.Albert.ProductionManager.csproj" />
+		<ProjectReference Include="..\VOL.Builder\VOL.Builder.csproj" />
+		<ProjectReference Include="..\VOL.Core\VOL.Core.csproj" />
+		<ProjectReference Include="..\VOL.Entity\VOL.Entity.csproj" />
+		<ProjectReference Include="..\VOL.System\VOL.System.csproj" />
+		<ProjectReference Include="..\VOL.Tuling.Device\VOL.Tuling.Device.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Download\Logger\Queue\WriteError\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="pulse-ui\section.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+
+</Project>
