@@ -9,7 +9,7 @@ void Main()
 	{
 		SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
 		{
-			ConnectionString = "server=localhost;Database=mes;Uid=root;Pwd=root123;AllowLoadLocalInfile=true",
+			ConnectionString = "server=localhost;Database=sqlsugar;Uid=root;Pwd=root123;AllowLoadLocalInfile=true",
 			DbType = SqlSugar.DbType.MySql,
 			IsAutoCloseConnection = true
 		},
@@ -28,7 +28,7 @@ void Main()
 		// 具体的代码
 		//db.Deleteable<Student>(new Student() { Id = 1 }).ExecuteCommand().Dump();
 		//db.Deleteable<Student>().In(2).ExecuteCommand().Dump();
-		//db.CodeFirst.InitTables(typeof(Student));
+		db.CodeFirst.InitTables(typeof(Student));
 		//db.Deleteable<Student>().In(3).IsLogic().ExecuteCommand().Dump();
 
 		db.Deleteable<Student>()

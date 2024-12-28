@@ -1,0 +1,30 @@
+[
+    {
+        "ConditionalList": [
+            {
+                "Key": 1,
+                "Value": {
+                    "FieldName": "DataPkInt",
+                    "FieldValue": "3",
+                    "ConditionalType": 0
+                }
+            },
+            {
+                "Key": 1,
+                "Value": {
+                    "FieldName": "DataPkInt",
+                    "FieldValue": "4",
+                    "ConditionalType": 0
+                }
+            },
+            {
+                "Key": 1,
+                "Value": {
+                    "FieldName": "DataPkInt",
+                    "FieldValue": "5",
+                    "ConditionalType": 0
+                }
+            }
+        ]
+    }
+]

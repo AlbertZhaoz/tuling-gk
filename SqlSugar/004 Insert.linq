@@ -9,7 +9,7 @@ void Main()
 	{
 		SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
 		{
-			ConnectionString = "server=localhost;Database=mes;Uid=root;Pwd=root123;AllowLoadLocalInfile=true",
+			ConnectionString = "server=localhost;Database=sqlsugar;Uid=root;Pwd=root123;AllowLoadLocalInfile=true",
 			DbType = SqlSugar.DbType.MySql,
 			IsAutoCloseConnection = true
 		},
